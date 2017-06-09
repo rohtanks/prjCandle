@@ -9,7 +9,7 @@ if (!isset($_POST['mem_nickname']) || !isset($_POST['mem_pw'])) exit;
 // login페이지에서 nickname 이나 pw 변수가 생성되지 않았을 경우 스크립트를 실행하지 않는다
 $session_id = $_POST['mem_nickname'];
 $session_pw = $_POST['mem_pw'];
-
+$prevPage = $_SESSION['prevPage'];
 // password_verify($session_pw, $hash);
 
 $sql_select_pw = "SELECT mem_pw FROM member WHERE mem_nickname = '".$session_id."'";
@@ -18,7 +18,7 @@ $row = mysqli_fetch_row($pwResult);
 
 if (password_verify($session_pw, $row[0])) {
 	$_SESSION['login_user'] = $session_id;
-	header("Location: ../view/index.php");
+  header('location:'.$prevPage);
 } else {
 	header("Location: ../view/login.php");
 }
