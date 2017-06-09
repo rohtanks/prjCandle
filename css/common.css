@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+nav ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+nav ul li {
+	display:inline; /* 세로나열을 가로나열로 변경 */
+	border-left: 1px solid #999; /* 각 메뉴의 왼쪽에 | 표시 */
+	padding: 0 10px; /* 각 메뉴 간격 */
+}
+nav ul li:first-child{
+	border-left:none; /* 메뉴 분류중 제일 왼쪽의 "|"는 삭제 */
+}
+
