@@ -1,6 +1,5 @@
 <?php
 session_start();
-$login_user = $_SESSION['login_user'];
 include '../config.php';
 include '../dbConfig.php';
 include '../common.php';
@@ -66,7 +65,7 @@ $result = mysqli_query ( $conn, $sql_select_list );
 		<tr>
 			<td>
 			<?php
-			include 'paging.php';
+			include '../board/paging.php';
 			?>
 			</td>
 		</tr>
@@ -75,12 +74,12 @@ $result = mysqli_query ( $conn, $sql_select_list );
 	if (! isset ( $_SESSION ['login_user'] )) {
 	?>
 	<!-- 로그인 전 -->
-			<a href='<?=$domainName?>prjCandle/view/login.php'>로그인</a>
+		<a href="<?=$domainName?>prjCandle/view/login.php">로그인</a>
 	<?php
 	} else {
 	?>
 	<!-- 로그인 후 -->
-			<a href="<?=$domainName?>prjcandle/view/write.php?mode=write">글쓰기</a>
+		<a href="<?=$domainName?>prjcandle/view/write.php?mode=write">글쓰기</a>
 	    <a href="<?=$domainName?>prjcandle/member/logout.php">로그아웃</a>
 	<?php
 	}
