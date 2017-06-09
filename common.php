@@ -1,5 +1,5 @@
 <?php
-include '../config.php';
+include 'config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,8 +28,8 @@ include '../config.php';
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-
-<div class="brand">노아람캔들</div>
+<body>
+<div class="brand"><a href="<?=$domainName?>prjCandle/view/index.php">노아람캔들</a></div>
 <div class="address-bar">경기도 군포시 송부로</div>
 
 <!-- Navigation -->
@@ -44,16 +44,17 @@ include '../config.php';
                 <span class="icon-bar"></span>
             </button>
             <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-            <a class="navbar-brand" href="index.html">노아람캔들</a>
+            <a class="navbar-brand" href="<?=$domainName?>prjCandle/index.php">노아람캔들</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <?php
+              $returnURL = $_SERVER['REQUEST_URI'];
               if (! isset ( $_SESSION ['login_user'] )) {
               ?>
               <!-- 로그인 전 -->
-                  <li><a href='<?=$domainName?>prjCandle/view/login.php'>로그인</a></li>
+                  <li><a href='<?=$domainName?>prjCandle/view/login.php?returnURL=<?=$returnURL?>'>로그인</a></li>
                   <li><a href='<?=$domainName?>prjCandle/view/register.php'>회원가입</a></li>
                   <li><a href='<?=$domainName?>prjCandle/view/list.php'>게시판</a></li>
                   <li><a href='<?=$domainName?>prjCandle/view/about.php'>상품소개</a></li>
