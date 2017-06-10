@@ -4,6 +4,12 @@ include '../common.php';
 $prevPage = $_SERVER ["HTTP_REFERER"];
 session_start ();
 $_SESSION ['prevPage'] = $prevPage;
+if (isset($_SESSION['login_user'])) {
+	$login_user = $_SESSION['login_user'];
+}
+if ($login_user) {
+	header("Location: ".$domainName."/prjCandle/view/index.php");
+}
 ?>
 <div class="row">
 	<div class="box">
