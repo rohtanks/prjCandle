@@ -1,6 +1,9 @@
 <?php
 include '../config.php';
 include '../common.php';
+$prevPage = $_SERVER["HTTP_REFERER"];
+session_start();
+$_SESSION['prevPage'] = $prevPage;
 ?>
 <body>
 		<div class="row">
@@ -12,6 +15,7 @@ include '../common.php';
 								</h2>
 								<hr>
 								<p>아이디와 비밀번호를 입력하세요.</p>
+
 								<form action="<?=$domainName?>prjcandle/member/loginOk.php" method="post"
 										accept-charset="utf-8">
 										<div class="row">
