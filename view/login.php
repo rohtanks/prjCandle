@@ -2,7 +2,9 @@
 include '../config.php';
 include '../common.php';
 $prevPage = $_SERVER ["HTTP_REFERER"];
-session_start ();
+if(!isset($_SESSION)){
+     session_start();
+} 
 $_SESSION ['prevPage'] = $prevPage;
 if (isset($_SESSION['login_user'])) {
 	$login_user = $_SESSION['login_user'];

@@ -1,8 +1,4 @@
 <?php
-if(!isset($_SESSION)){
-     session_start();
-} 
-$login_user = $_SESSION['login_user'];
 include '../config.php';
 include '../common.php';
 ?>
