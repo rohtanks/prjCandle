@@ -1,8 +1,10 @@
 <?php
+if(!isset($_SESSION)){
+    session_start();
+}
 include '../config.php';
 include '../common.php';
 $prevPage = $_SERVER["HTTP_REFERER"];
-session_start();
 $_SESSION['prevPage'] = $prevPage;
 ?>
 <body>

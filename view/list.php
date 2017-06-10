@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(!isset($_SESSION)){
+    session_start();
+}
 $login_user = $_SESSION['login_user'];
 include '../config.php';
 include '../dbConfig.php';
@@ -66,7 +68,7 @@ $result = mysqli_query ( $conn, $sql_select_list );
 		<tr>
 			<td>
 			<?php
-			include 'paging.php';
+			include '../board/paging.php';
 			?>
 			</td>
 		</tr>

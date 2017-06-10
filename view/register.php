@@ -408,16 +408,6 @@ include '../common.php';
 						</div>
 					</form>
 				</div>
-
-				<div class="footer">
-					<a
-						href="https://opentutorials.org/auth?mode=forget&amp;returnURL=https%3A%2F%2Fopentutorials.org%2Fcourse%2F2598">비밀번호
-						찾기</a> | <a
-						href="<?=$domainName?>prjcandle/member/login.php">로그인</a>
-				</div>
-			</div>
-		</div>
-	</div>
 	<!-- 	다음 주소 검색 서비스 시작 -->
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script type="text/javascript">
