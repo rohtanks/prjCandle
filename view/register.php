@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include '../config.php';
 include '../common.php';
 ?>
@@ -143,7 +143,7 @@ include '../common.php';
 			} else {
 			    $.ajax({
 			     	type: "POST",
-			     	url: "idCheck.php", // 이페이지에서 중복체크를 한다
+			     	url: "../member/idCheck.php", // 이페이지에서 중복체크를 한다
 			     	data: {"id":inputId.val()}, // idCheck.php에 id 값을 보낸다
 			     	success: function(data){
 						console.log(data);

@@ -16,7 +16,7 @@ $_SESSION['prevPage'] = $prevPage;
 								<hr>
 								<p>아이디와 비밀번호를 입력하세요.</p>
 
-								<form action="<?=$domainName?>prjcandle/member/loginOk.php" method="post"
+								<form action="<?=$domainName?>prjCandle/member/loginOk.php" method="post"
 										accept-charset="utf-8">
 										<div class="row">
 												<div class="form-group col-lg-4">
@@ -36,8 +36,6 @@ $_SESSION['prevPage'] = $prevPage;
 						</div>
 				</div>
 		</div>
-
-</div>
 <!-- /.container -->
 <?php
 include '../footer.php';
