@@ -2,21 +2,12 @@
 include '../config.php';
 include '../common.php';
 ?>
-<body>
-	<script src="https://code.jquery.com/jquery-3.2.1.js"
-		integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-		crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.js"
+	integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+	crossorigin="anonymous"></script>
 
-	<!-- 추후 css로 이동 -->
-	<style type="text/css">
-body {
-	text-align: center;
-}
-
-h1 {
-	text-align: center;
-}
-
+<!-- 추후 css로 이동 -->
+<style type="text/css">
 body .layerbox#register_auth div.wrapper div.body dl.form1 dd input.text
 	{
 	width: 260px;
@@ -25,7 +16,7 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd input.text
 	font-size: 1.2em;
 }
 
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+html, span, applet, object, iframe, h3, h4, h5, h6, p,
 	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
 	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
 	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
@@ -64,115 +55,115 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 }
 </style>
 
-	<div class="row">
-		<div class="box">
-			<div class="col-lg-12">
-				<hr>
-				<h2 class="intro-text text-center">
-					<strong>회원가입</strong>
-				</h2>
-				<hr>
-				<div class="entry-area">
-					<div class="layerbox" id="register_auth" style="width: 500px;">
-						<div class="wrapper table">
-							<div class="header"></div>
-							<div class="body">
+<div class="row">
+	<div class="box">
+		<div class="col-lg-12">
+			<hr>
+			<h2 class="intro-text text-center">
+				<strong>회원가입</strong>
+			</h2>
+			<hr>
+			<div class="entry-area">
+				<div class="layerbox" id="register_auth"">
+					<div class="wrapper table">
+						<div class="header"></div>
+						<div class="body">
 
-								<form id="mem_form"
-									action="<?=$domainName?>prjcandle/member/registerOk.php"
-									method="post" accept-charset="utf-8">
-									<dl class="form1">
-										<!-- description list dt(defines terms/names) dd(describes each term/name) 태그와 함께 사용 -->
-										<p>
-											<img src="<?=$domainName?>prjcandle/img/check_icon.png"
-												height="15px"> 는 필수 입력 항목입니다.
-										</p>
-										<dt>
-											<img src="<?=$domainName?>prjcandle/img/check_icon.png"
-												height="15px"> <label for="mem_name">이름</label>
-										</dt>
-										<dd>
-											<input type="text" id="mem_name" name="mem_name" /><br> <span
-												id="nameCheck_msg" class="txt_message"></span>
-										</dd>
-										<dt>
-											<img src="<?=$domainName?>prjcandle/img/check_icon.png"
-												height="15px"> <label for="mem_nickname">아이디</label>
-										</dt>
-										<dd>
-											<input type="text" id="mem_nickname" name="mem_nickname" />
-											<p class="notice" id="msg_mb_id">영문자, 숫자, _ 만 입력 가능.</p>
-											<br> <span id="idCheck_msg" class="txt_message"></span>
-										</dd>
-										<dt>
-											<img src="<?=$domainName?>prjcandle/img/check_icon.png"
-												height="15px"> <label for="mem_pw">비밀번호</label>
-										</dt>
-										<dd>
-											<input type="password" id="mem_pw" name="mem_pw" />
-											<p class="notice" id="msg_mb_pw">비밀번호는 8글자 이상 적어도 한개 이상의
-												영대소문자, 숫자, 특수문자(!@#$%^&*+=-)를 입력하세요.</p>
-											<br> <span id="pwCheck_msg" class="txt_message"></span>
-										</dd>
-										<dt>
-											<img src="<?=$domainName?>prjcandle/img/check_icon.png"
-												height="15px"> <label for="pw2">비밀번호 확인</label>
-										</dt>
-										<dd>
-											<input type="password" id="mem_pw2" name="mem_pw2" />
-											<p class="notice" id="msg_mb_pw_re">비밀번호를 다시한번 입력하세요.</p>
-										</dd>
-										<dt>
-											<img src="<?=$domainName?>prjcandle/img/check_icon.png"
-												height="15px"> <label for="mem_phoneNum">휴대폰 번호</label>
-										</dt>
-										<dd>
-											<input type="text" id="mem_phoneNum" name="mem_phoneNum" /><br>
-											<span id="phoneNumCheck_msg" class="txt_message"></span>
-										</dd>
-										<dt>
-											<img src="<?=$domainName?>prjcandle/img/check_icon.png"
-												height="15px"> <label for="mem_email">이메일 주소</label>
-										</dt>
-										<dd>
-											<input type="email" id="mem_email" name="mem_email" /><br> <span
-												id="emailCheck_msg" class="txt_message"></span>
-										</dd>
-										<dt>
-											<img src="<?=$domainName?>prjcandle/img/check_icon.png"
-												height="15px"> <label for="mem_addr">주소</label>
-										</dt>
-										<dd>
-											<input type="text" id="mem_postcode" readonly="readonly"
-												placeholder="우편번호"> <input type="button"
-												onclick="execDaumPostcode()" value="우편번호 찾기"><br> <input
-												type="text" id="mem_address" readonly="readonly"
-												placeholder="주소"> <input type="text" id="mem_address2"
-												placeholder="상세주소"> <input type="button" id="btn_addr"
-												onclick="sumAddress()" value="주소 입력하기"> <input type="text"
-												id="sumAddr_txt" name="mem_addr"> <input type="button"
-												id="test" value="test">
-										</dd>
-									</dl>
-									<div class="btns">
-										<p>
-											<button type="button" id="btn_submit" class="btn btn_submit">가입하기</button>
-										</p>
-									</div>
-								</form>
-							</div>
+							<form id="mem_form"
+								action="<?=$domainName?>prjcandle/member/registerOk.php"
+								method="post" accept-charset="utf-8">
+								<dl class="form1">
+									<!-- description list dt(defines terms/names) dd(describes each term/name) 태그와 함께 사용 -->
+									<p>
+										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
+											height="15px"> 는 필수 입력 항목입니다.
+									</p>
+									<dt>
+										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
+											height="15px"> <label for="mem_name">이름</label>
+									</dt>
+									<dd>
+										<input type="text" id="mem_name" name="mem_name" /><br> <span
+											id="nameCheck_msg" class="txt_message"></span>
+									</dd>
+									<dt>
+										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
+											height="15px"> <label for="mem_nickname">아이디</label>
+									</dt>
+									<dd>
+										<input type="text" id="mem_nickname" name="mem_nickname" />
+										<p class="notice" id="msg_mb_id">영문자, 숫자, _ 만 입력 가능.</p>
+										<br> <span id="idCheck_msg" class="txt_message"></span>
+									</dd>
+									<dt>
+										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
+											height="15px"> <label for="mem_pw">비밀번호</label>
+									</dt>
+									<dd>
+										<input type="password" id="mem_pw" name="mem_pw" />
+										<p class="notice" id="msg_mb_pw">비밀번호는 8글자 이상 적어도 한개 이상의
+											영대소문자, 숫자, 특수문자(!@#$%^&*+=-)를 입력하세요.</p>
+										<br> <span id="pwCheck_msg" class="txt_message"></span>
+									</dd>
+									<dt>
+										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
+											height="15px"> <label for="pw2">비밀번호 확인</label>
+									</dt>
+									<dd>
+										<input type="password" id="mem_pw2" name="mem_pw2" />
+										<p class="notice" id="msg_mb_pw_re">비밀번호를 다시한번 입력하세요.</p>
+									</dd>
+									<dt>
+										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
+											height="15px"> <label for="mem_phoneNum">휴대폰 번호</label>
+									</dt>
+									<dd>
+										<input type="text" id="mem_phoneNum" name="mem_phoneNum" /><br>
+										<span id="phoneNumCheck_msg" class="txt_message"></span>
+									</dd>
+									<dt>
+										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
+											height="15px"> <label for="mem_email">이메일 주소</label>
+									</dt>
+									<dd>
+										<input type="email" id="mem_email" name="mem_email" /><br> <span
+											id="emailCheck_msg" class="txt_message"></span>
+									</dd>
+									<dt>
+										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
+											height="15px"> <label for="mem_addr">주소</label>
+									</dt>
+									<dd>
+										<input type="text" id="mem_postcode" readonly="readonly"
+											placeholder="우편번호"> <input type="button"
+											onclick="execDaumPostcode()" value="우편번호 찾기"><br> <input
+											type="text" id="mem_address" readonly="readonly"
+											placeholder="주소"> <input type="text" id="mem_address2"
+											placeholder="상세주소"> <input type="button" id="btn_addr"
+											onclick="sumAddress()" value="주소 입력하기"> <input type="text"
+											id="sumAddr_txt" name="mem_addr"> <input type="button"
+											id="test" value="test">
+									</dd>
+								</dl>
+								<div class="btns">
+									<p>
+										<button type="button" id="btn_submit" class="btn btn_submit">가입하기</button>
+									</p>
+								</div>
+							</form>
+						</div>
 
-							<div class="footer">
-								<a
-									href="https://opentutorials.org/auth?mode=forget&amp;returnURL=https%3A%2F%2Fopentutorials.org%2Fcourse%2F2598">비밀번호
-									찾기</a> | <a href="<?=$domainName?>prjcandle/member/login.php">로그인</a>
-							</div>
+						<div class="footer">
+							<a
+								href="https://opentutorials.org/auth?mode=forget&amp;returnURL=https%3A%2F%2Fopentutorials.org%2Fcourse%2F2598">비밀번호
+								찾기</a> | <a href="<?=$domainName?>prjcandle/member/login.php">로그인</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 <script type="text/javascript">
 // 필수 입력 체크 시작
 	$(function(){ // $(document).ready(function(){ 과 같다 모든 html 페이지가 화면에 뿌려지고 나서 저 ready안에 서술된 이벤트들이 동작준비를 한다
@@ -421,9 +412,9 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 // 엔터키 폼 전송 방지 끝
 
 </script>
-	<!-- 	다음 주소 검색 서비스 시작 -->
-	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	<script type="text/javascript">
+<!-- 	다음 주소 검색 서비스 시작 -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript">
     function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -466,8 +457,8 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
         }).open();
     }
 </script>
-	<!-- 	다음 주소 검색 서비스 끝 -->
-	<script type="text/javascript">
+<!-- 	다음 주소 검색 서비스 끝 -->
+<script type="text/javascript">
 	function sumAddress() {
 		if (!document.getElementById('mem_address2').value) {
 			alert('상세주소를 입력해 주세요.');
@@ -483,7 +474,5 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 <?php
 include '../footer.php';
 ?>
-
-
 </body>
 </html>
