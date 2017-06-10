@@ -7,7 +7,7 @@ $_SESSION ['prevPage'] = $prevPage;
 if (isset($_SESSION['login_user'])) {
 	$login_user = $_SESSION['login_user'];
 }
-if ($login_user) {
+if (isset($login_user)) {
 	header("Location: ".$domainName."/prjCandle/view/index.php");
 }
 ?>
