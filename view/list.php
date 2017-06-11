@@ -1,7 +1,7 @@
 <?php
 if(!isset($_SESSION)){
      session_start();
-} 
+}
 include '../config.php';
 include '../dbConfig.php';
 include '../common.php';
@@ -33,7 +33,7 @@ $result = mysqli_query ( $conn, $sql_select_list );
 // echo "총 페이지 수 = " . $total_page . "<br>";
 // echo "총 블록 수 = " . $total_block . "<br>";
 ?>
-<div class="box">
+<div class="box" style="padding-left: 600px;">
 <body>
 	<!-- 게시물 리스트 -->
 	<table>

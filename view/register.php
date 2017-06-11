@@ -56,13 +56,13 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 </style>
 
 <div class="row">
-	<div class="box">
+		<div class="box" style="padding-left: 600px;">
 		<div class="col-lg-12">
-			<hr>
-			<h2 class="intro-text text-center">
+
+			<h2 class="intro-text" style="margin-bottom: 50px">
 				<strong>회원가입</strong>
 			</h2>
-			<hr>
+
 			<div class="entry-area">
 				<div class="layerbox" id="register_auth"">
 					<div class="wrapper table">
