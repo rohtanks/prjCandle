@@ -6,7 +6,8 @@ $findtext= $_POST['findtext'];
 include '../config.php';
 include '../common.php';
 include '../dbConfig.php';
-$query = "SELECT * from product where name like '%$findtext%' order by name";
+$query = "SELECT * from product where productname like '%$findtext%' order by productname";
+$result = mysqli_query ( $conn, $query );
 ?>
 
 <body>
@@ -23,46 +24,28 @@ $query = "SELECT * from product where name like '%$findtext%' order by name";
 					<td width="150" align="right">가격</td>
 					<td width="20"></td>
 				</tr>
+        <?php
+        while ($row = mysqli_fetch_assoc ( $result ) ) {
+          ?>
 				<tr bgcolor="8B9CBF"><td height="1" colspan="5"  bgcolor="AAAAAA"></td></tr>
-
 				<tr height="70">
 					<td width="80" align="center" valign="middle">
-						<a href="product_detail.php?no=1"><img src="../img/candle1.jpg" width="60" height="60" border="0"></a>
+						<a href="product_detail.php?no=1"><img src="<?= $row['productimage1']?>" width="60" height="60" border="0"></a>
 					</td>
 					<td align="left" valign="middle">
-						<a href="product_detail.php?no=1"><font color="#4186C7"><b>제품명1</b></font></a><br>
+						<a href="product_detail.php?no=1"><font color="#4186C7"><?= $row['productname']?></font></a><br>
 						<img src="../img/i_hit.gif" align="absmiddle" vspace="1"> <img src="../img/i_new.gif" align="absmiddle" vspace="1">
 					</td>
-					<td width="150" align="right" valign="middle">72,000 원</td>
+					<td width="150" align="right" valign="middle"><?= $row['productprice']?>원</td>
 					<td width="20"></td>
 				</tr>
 				<tr><td align="center" valign="middle" colspan="5" height="1" background="../img/ln1.gif"></td></tr>
 
-				<tr height="70">
-					<td width="80" align="center" valign="middle">
-						<a href="product_detail.php?no=2"><img src="../img/candle2.jpg" width="60" height="60" border="0"></a>
-					</td>
-					<td align="left" valign="middle">
-						<a href="product_detail.php?no=2"><font color="#4186C7"><b>제품명2</b></font></a><br>
-						<img src="../img/i_new.gif" align="absmiddle" vspace="1">
-					</td>
-					<td width="150" align="right" valign="middle">99,000 원</td>
-					<td width="20"></td>
-				</tr>
-				<tr><td align="center" valign="middle" colspan="5" height="1" background="../img/ln1.gif"></td></tr>
+        <?php
+        }
 
-				<tr height="70">
-					<td width="80" align="center" valign="middle">
-						<a href="product_detail.php?no=3"><img src="../img/candle3.jpg" width="60" height="60" border="0"></a>
-					</td>
-					<td align="left" valign="middle">
-						<a href="product_detail.php?no=3"><font color="#4186C7"><b>제품명3</b></font></a><br>
-						<img src="../img/i_sale.gif" align="absmiddle" vspace="1"> <font color="red">20%</font>
-					</td>
-					<td width="150" align="right" valign="middle"><strike>89,000 원</strike><br>62,400 원</td>
-					<td width="20"></td>
-				</tr>
-
+        mysqli_close($conn);
+        ?>
 				<tr bgcolor="8B9CBF"><td height="3" colspan="5"></td></tr>
 			</table>
 		</td>
