@@ -34,7 +34,6 @@ $result = mysqli_query ( $conn, $sql_select_list );
 // echo "총 블록 수 = " . $total_block . "<br>";
 ?>
 <div class="box" style="padding-left: 600px;">
-<body>
 	<!-- 게시물 리스트 -->
 	<table>
 		<tr>
@@ -67,7 +66,11 @@ $result = mysqli_query ( $conn, $sql_select_list );
 		<tr>
 			<td>
 			<?php
-			include '../board/paging.php';
+			if ($total_row < 1) {
+				echo "게시물이 없습니다.";
+			} else {
+				include '../board/paging.php';
+			}
 			?>
 			</td>
 		</tr>
