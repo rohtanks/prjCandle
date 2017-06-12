@@ -1,6 +1,14 @@
 <?php
 include '../config.php';
 include '../common.php';
+// 회원가입 페이지에서 로그인을 할 경우 세션이 부여됐음에도 직전 페이지인 회원가입 페이지로 돌아가는 것을 방지하기 위해
+// 세션이 부여되었다면 직전 작업페이지가 회원가입 페이지에 한해 메인 페이지로 보냄
+if (!isset($_SESSION)) {
+	session_start();
+}
+if (isset($_SESSION['login_user'])) {
+	header('Location: '.$domainName.'prjCandle/view/index.php');
+}
 ?>
 <script src="https://code.jquery.com/jquery-3.2.1.js"
 	integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
@@ -59,7 +67,7 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 			</h2>
 
 			<div class="entry-area">
-				<div class="layerbox" id="register_auth"">
+				<div class="layerbox" id="register_auth">
 					<div class="wrapper table">
 						<div class="header"></div>
 						<div class="body">
