@@ -6,5 +6,5 @@ $password = "autoset";
 $dbname = "prjcandle";
 
 $conn = mysqli_connect ( $servername, $username, $password ) or exit("DB connection failed");
-mysqli_select_db ( $conn, $dbname) or exit("DB connection failed");
+mysqli_select_db ($conn, $dbname) or exit("DB connection failed");
 ?>
