@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(!isset($_SESSION)){
+     session_start();
+}
 $login_user = $_SESSION['login_user'];
 
 include '../config.php';
@@ -10,7 +12,7 @@ include '../common.php';
 $mode = $_GET['mode'];
 ?>
 <body>
-	<div class="box">
+<div class="box" style="padding-left: 600px;">
 	<div><?php echo $login_user?></div>
 	<?php
 	// 글 쓰기
