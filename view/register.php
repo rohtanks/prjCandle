@@ -8,28 +8,7 @@ include '../common.php';
 
 <!-- 추후 css로 이동 -->
 <style type="text/css">
-body .layerbox#register_auth div.wrapper div.body dl.form1 dd input.text
-	{
-	width: 260px;
-	margin-right: auto;
-	padding: 5px;
-	font-size: 1.2em;
-}
 
-html, span, applet, object, iframe, h3, h4, h5, h6, p,
-	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
-	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
-	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
-	table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
-	details, figcaption, figure, footer, header, hgroup, menu, nav, section,
-	summary, time, mark, audio, video {
-	margin: 0;
-	padiing: 0;
-	border: 0;
-	outline: 0;
-	font-size: 100%;
-	vertical-align: baseline;
-}
 
 body .layerbox#register_auth div.wrapper div.body dl.form1 dt {
 	text-align: left;
@@ -53,6 +32,22 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd p.notice {
 body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 	font-size: 11px;
 }
+
+.info_error {
+    border: 1px solid #f2685e;
+    background: #fffafa;
+}
+
+.testClass {
+	border: 1px solid #000000;
+	background: #ffffff;
+}
+
+/* .inp_info {
+	border: 1px solid #000000;
+	background: #ccffff;
+} */
+
 </style>
 
 <div class="row">
@@ -83,51 +78,63 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 											height="15px"> <label for="mem_name">이름</label>
 									</dt>
 									<dd>
-										<input type="text" id="mem_name" name="mem_name" /><br> <span
-											id="nameCheck_msg" class="txt_message"></span>
+										<div class="inp_info">
+											<input type="text" id="mem_name" class="testClass" name="mem_name" /><br>
+											<span id="nameCheck_msg" class="txt_message"></span>
+										</div>
 									</dd>
 									<dt>
 										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
 											height="15px"> <label for="mem_nickname">아이디</label>
 									</dt>
 									<dd>
-										<input type="text" id="mem_nickname" name="mem_nickname" />
-										<p class="notice" id="msg_mb_id">영문자, 숫자, _ 만 입력 가능.</p>
-										<br> <span id="idCheck_msg" class="txt_message"></span>
+										<div class="inp_info">
+											<input type="text" id="mem_nickname" class="testClass" name="mem_nickname" />
+											<p class="notice" id="msg_mb_id">영문자, 숫자, _ 만 입력 가능.</p><br>
+											<span id="idCheck_msg" class="txt_message"></span>
+										</div>
 									</dd>
 									<dt>
 										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
 											height="15px"> <label for="mem_pw">비밀번호</label>
 									</dt>
 									<dd>
-										<input type="password" id="mem_pw" name="mem_pw" />
-										<p class="notice" id="msg_mb_pw">비밀번호는 8글자 이상 적어도 한개 이상의
-											영대소문자, 숫자, 특수문자(!@#$%^&*+=-)를 입력하세요.</p>
-										<br> <span id="pwCheck_msg" class="txt_message"></span>
+										<div class="inp_info">
+											<input type="password" id="mem_pw" class="testClass" name="mem_pw" />
+											<p class="notice" id="msg_mb_pw">비밀번호는 8글자 이상 적어도 한개 이상의
+											영대소문자, 숫자, 특수문자(!@#$%^&*+=-)를 입력하세요.</p><br>
+											<span id="pwCheck_msg" class="txt_message"></span>
+										</div>
 									</dd>
 									<dt>
 										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
 											height="15px"> <label for="pw2">비밀번호 확인</label>
 									</dt>
 									<dd>
-										<input type="password" id="mem_pw2" name="mem_pw2" />
-										<p class="notice" id="msg_mb_pw_re">비밀번호를 다시한번 입력하세요.</p>
+										<div class="inp_info">
+											<input type="password" id="mem_pw2" class="testClass" name="mem_pw2" />
+											<p class="notice" id="msg_mb_pw_re">비밀번호를 다시한번 입력하세요.</p>
+										</div>
 									</dd>
 									<dt>
 										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
 											height="15px"> <label for="mem_phoneNum">휴대폰 번호</label>
 									</dt>
 									<dd>
-										<input type="text" id="mem_phoneNum" name="mem_phoneNum" /><br>
-										<span id="phoneNumCheck_msg" class="txt_message"></span>
+										<div class="inp_info">
+											<input type="text" id="mem_phoneNum" class="testClass" name="mem_phoneNum" /><br>
+											<span id="phoneNumCheck_msg" class="txt_message"></span>
+										</div>
 									</dd>
 									<dt>
 										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
 											height="15px"> <label for="mem_email">이메일 주소</label>
 									</dt>
 									<dd>
-										<input type="email" id="mem_email" name="mem_email" /><br> <span
-											id="emailCheck_msg" class="txt_message"></span>
+										<div class="inp_info">
+											<input type="email" id="mem_email" class="testClass" name="mem_email" /><br>
+											<span id="emailCheck_msg" class="txt_message"></span>
+										</div>
 									</dd>
 									<dt>
 										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
@@ -393,6 +400,22 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 				form.submit();
 			} else {
 				// TODO 유효성 체크가 성공하지 않은 input 태그의 테두리 색 변화
+				// Flag들 중 어떤 것이라도 값이 1이 아니라면 해당 input 박스의 테두리 색을 빨간색으로 바꾼다.
+				if (nameFlag != 1) {
+					inputName.attr('class', 'info_error');
+				} else if (idFlag != 1) {
+					inputId.attr('class', 'info_error');
+				} else if (pwFlag != 1) {
+					inputPw.attr('class', 'info_error');
+				} else if (pw2Flag != 1) {
+					inputPw2.attr('class', 'info_error');
+				} else if (phoneNumFlag != 1) {
+					inputPhoneNum.attr('class', 'info_error');
+				} else if (emailFlag != 1) {
+					inputEmail.attr('class', 'info_error');
+				} else {
+					
+				}
 			}
 		});
 		// 폼 전송 체크 끝
