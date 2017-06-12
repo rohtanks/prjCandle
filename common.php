@@ -36,21 +36,21 @@ include 'config.php';
   if (! isset ( $_SESSION ['login_user'] )) {
   ?>
   <!-- 로그인 전 -->
-  <table width="959" border="0" cellspacing="0" cellpadding="0" align="center" style="width:170px; margin-left: 1200px;">
- 	 <tr>
-  <td align="right" valign="bottom" bgcolor = "#fff">
-  <table border="0" cellspacing="0" cellpadding="0">
- 	 <tr>
- 		 <td><a href="<?=$domainName?>prjCandle/view/index.php">HOME</a></td>
- 		 <td><img src="../img/menu_line.gif" width="11"></td>
- 		 <td><a href="<?=$domainName?>prjCandle/view/login.php?returnURL=<?=$returnURL?>">로그인</a></td>
- 		 <td><img src="../img/menu_line.gif" width="11"></td>
- 		 <td><a href="<?=$domainName?>prjCandle/view/register.php">회원가입</a></td>
- 	 </tr>
-  </table>
- </td>
- </tr>
- </table>
+	<table width="959" border="0" cellspacing="0" cellpadding="0" align="center" style="width:170px; margin-left: 1200px;">
+	 <tr>
+	<td align="right" valign="bottom" bgcolor = "#fff">
+	<table border="0" cellspacing="0" cellpadding="0">
+	 <tr>
+		 <td><a href="<?=$domainName?>prjCandle/view/index.php">HOME</a></td>
+		 <td><img src="../img/menu_line.gif" width="11"></td>
+		 <td><a href="<?=$domainName?>prjCandle/view/login.php?returnURL=<?=$returnURL?>">로그인</a></td>
+		 <td><img src="../img/menu_line.gif" width="11"></td>
+		 <td><a href="<?=$domainName?>prjCandle/view/register.php">회원가입</a></td>
+	 </tr>
+	</table>
+	</td>
+	</tr>
+	</table>
  <?php
  } else {
  ?>
