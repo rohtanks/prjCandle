@@ -57,7 +57,7 @@ include 'config.php';
 	                  <li><a href='<?=$domainName?>prjCandle/view/login.php?returnURL=<?=$returnURL?>'>로그인</a></li>
 	                  <li><a href='<?=$domainName?>prjCandle/view/register.php'>회원가입</a></li>
 	                  <li><a href='<?=$domainName?>prjCandle/view/list.php'>게시판</a></li>
-	                  <li><a href='<?=$domainName?>prjCandle/view/about.php'>상품소개</a></li>
+	                  <li><a href='<?=$domainName?>prjCandle/view/about.php'>회사소개</a></li>
 										 <li><form name="form1" style="margin-top:30px" method="post" action="../product/product_search.php">
 												<td width="135">
 													<input type="text" name="findtext" maxlength="40" size="18">
@@ -71,9 +71,9 @@ include 'config.php';
 	              ?>
 	              <!-- 로그인 후 -->
 	                  <li><a href='<?=$domainName?>prjCandle/member/logout.php'>로그아웃</a></li>
-	                  <li><a href='<?=$domainName?>prjCandle/view/write.php?mode=write'>글쓰기</a></li>
+	                  <li><a href='<?=$domainName?>prjCandle/view/product.php'>상품소개</a></li>
 	                  <li><a href='<?=$domainName?>prjCandle/view/list.php'>게시판</a></li>
-	                  <li><a href='<?=$domainName?>prjCandle/view/about.php'>상품소개</a></li>
+	                  <li><a href='<?=$domainName?>prjCandle/view/about.php'>회사소개</a></li>
 										<li><form name="form1" style="margin-top:30px" method="post" action="../product/product_search.php">
 											 <td width="135">
 												 <input type="text" name="findtext" maxlength="40" size="18">
