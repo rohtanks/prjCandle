@@ -18,6 +18,9 @@ $row = mysqli_fetch_row($pwResult);
 
 if (password_verify($session_pw, $row[0])) {
 	$_SESSION['login_user'] = $session_id;
+	// 회원가입 페이지에서 로그인을 할 경우 세션이 부여됐음에도 직전 페이지인 회원가입 페이지로 돌아가는 것을 방지하기 위해
+	// 세션이 부여되었다면 직전 작업페이지가 회원가입 페이지에 한해 메인 페이지로 보냄
+	// TODO register.php에서 돌리는 방법과 이 방법 둘 중 하나 테스트 필요
 	if ($prevPage == "http://localhost/prjCandle/view/register.php") {
 		header("Location: ../view/index.php");
 	} else {
