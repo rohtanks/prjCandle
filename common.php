@@ -50,11 +50,10 @@ include 'config.php';
 	        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	            <ul class="nav navbar-nav">
 	              <?php
-	              $returnURL = $_SERVER['REQUEST_URI'];
 	              if (! isset ( $_SESSION ['login_user'] )) {
 	              ?>
 	              <!-- 로그인 전 -->
-	                  <li><a href='<?=$domainName?>prjCandle/view/login.php?returnURL=<?=$returnURL?>'>로그인</a></li>
+	                  <li><a href='<?=$domainName?>prjCandle/view/login.php?'>로그인</a></li>
 	                  <li><a href='<?=$domainName?>prjCandle/view/register.php'>회원가입</a></li>
 	                  <li><a href='<?=$domainName?>prjCandle/view/list.php'>게시판</a></li>
 	                  <li><a href='<?=$domainName?>prjCandle/view/about.php'>회사소개</a></li>
