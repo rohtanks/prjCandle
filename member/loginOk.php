@@ -18,7 +18,11 @@ $row = mysqli_fetch_row($pwResult);
 
 if (password_verify($session_pw, $row[0])) {
 	$_SESSION['login_user'] = $session_id;
-  	header("Location: ".$prevPage);
+	if ($prevPage == "http://localhost/prjCandle/view/register.php") {
+		header("Location: ../view/index.php");
+	} else {
+  		header("Location: ".$prevPage);
+	}
 } else {
 	header("Location: ../view/login.php");
 }

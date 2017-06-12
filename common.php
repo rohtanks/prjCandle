@@ -31,7 +31,48 @@ include 'config.php';
 <body>
 	<div class="brand"><a href="<?=$domainName?>prjCandle/view/index.php">노아람캔들</a></div>
 	<div class="address-bar">경기도 군포시 송부로</div>
-
+	<?php
+  $returnURL = $_SERVER['REQUEST_URI'];
+  if (! isset ( $_SESSION ['login_user'] )) {
+  ?>
+  <!-- 로그인 전 -->
+  <table width="959" border="0" cellspacing="0" cellpadding="0" align="center" style="width:170px; margin-left: 1200px;">
+ 	 <tr>
+  <td align="right" valign="bottom" bgcolor = "#fff">
+  <table border="0" cellspacing="0" cellpadding="0">
+ 	 <tr>
+ 		 <td><a href="<?=$domainName?>prjCandle/view/index.php">HOME</a></td>
+ 		 <td><img src="../img/menu_line.gif" width="11"></td>
+ 		 <td><a href="<?=$domainName?>prjCandle/view/login.php?returnURL=<?=$returnURL?>">로그인</a></td>
+ 		 <td><img src="../img/menu_line.gif" width="11"></td>
+ 		 <td><a href="<?=$domainName?>prjCandle/view/register.php">회원가입</a></td>
+ 	 </tr>
+  </table>
+ </td>
+ </tr>
+ </table>
+ <?php
+ } else {
+ ?>
+ <!-- 로그인 후 -->
+ <table width="959" border="0" cellspacing="0" cellpadding="0" align="center" style="width:180px; margin-left: 1085px;">
+	 <tr>
+  <td align="right" valign="bottom" bgcolor = "#fff">
+ <table border="0" cellspacing="0" cellpadding="0">
+	 <tr>
+		 <td><a href="<?=$domainName?>prjCandle/view/index.php">HOME</a></td>
+		 <td><img src="../img/menu_line.gif" width="11"></td>
+		 <td><a href="<?=$domainName?>prjCandle/member/logout.php">로그아웃</a></td>
+		 <td><img src="../img/menu_line.gif" width="11"></td>
+		 <td><a href="<?=$domainName?>prjCandle/view/register.php">회원가입</a></td>
+	 </tr>
+ </table>
+</td>
+</tr>
+</table>
+<?php
+}
+?>
 	<!-- Navigation -->
 	<nav class="navbar navbar-default" role="navigation">
 	    <div class="container">
@@ -50,11 +91,12 @@ include 'config.php';
 	        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	            <ul class="nav navbar-nav">
 	              <?php
+	              $returnURL = $_SERVER['REQUEST_URI'];
 	              if (! isset ( $_SESSION ['login_user'] )) {
 	              ?>
 	              <!-- 로그인 전 -->
-	                  <li><a href='<?=$domainName?>prjCandle/view/login.php?'>로그인</a></li>
-	                  <li><a href='<?=$domainName?>prjCandle/view/register.php'>회원가입</a></li>
+	                  <li><a href='<?=$domainName?>prjCandle/view/login.php?returnURL=<?=$returnURL?>'>로그인</a></li>
+	                  <li><a href='<?=$domainName?>prjCandle/view/product.php'>상품소개</a></li>
 	                  <li><a href='<?=$domainName?>prjCandle/view/list.php'>게시판</a></li>
 	                  <li><a href='<?=$domainName?>prjCandle/view/about.php'>회사소개</a></li>
 										 <li><form name="form1" style="margin-top:30px" method="post" action="../product/product_search.php">
@@ -69,7 +111,7 @@ include 'config.php';
 	              } else {
 	              ?>
 	              <!-- 로그인 후 -->
-	                  <li><a href='<?=$domainName?>prjCandle/member/logout.php'>로그아웃</a></li>
+								    <li><a href='<?=$domainName?>prjCandle/member/logout.php'>로그아웃</a></li>
 	                  <li><a href='<?=$domainName?>prjCandle/view/product.php'>상품소개</a></li>
 	                  <li><a href='<?=$domainName?>prjCandle/view/list.php'>게시판</a></li>
 	                  <li><a href='<?=$domainName?>prjCandle/view/about.php'>회사소개</a></li>
