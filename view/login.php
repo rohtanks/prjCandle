@@ -1,7 +1,7 @@
 <?php
 include '../config.php';
 include '../common.php';
-$prevPage = $_SERVER ["HTTP_REFERER"];
+$prevPage = $_SERVER ['HTTP_REFERER'];
 if(!isset($_SESSION)){
      session_start();
 } 
