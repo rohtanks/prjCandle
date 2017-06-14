@@ -449,6 +449,8 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 		btn_submit.click(function(){
 			if (nameFlag && idFlag && pwFlag && pw2Flag && phoneNumFlag && emailFlag && addrFlag == 1) { // 모든 유효성 체크가 성공해야 submit을 할 수 있다
 				form.submit();
+			} else {
+				alert('모든 필수 항목을 입력해 주세요.');
 			}
 		});
 		// 폼 전송 체크 끝
