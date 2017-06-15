@@ -18,10 +18,6 @@ if ($sort == "up"){
 }
 $result= mysqli_query ( $conn, $query );
 $total_rows = mysqli_num_rows($result);
-$num_col=5;
-$num_row=4;
-$page_line=$num_col*$num_row;
-$icount=0;
 ?>
   		<div class="box" style="padding-left: 600px;">
 			<form name="form2" method="post" action="product.php">
@@ -63,16 +59,21 @@ $icount=0;
 			</table>
 			</form>
       <br>
+      <?php
+      $num_col=5;
+      $num_row=3;
+      $icount=0;
+      ?>
       	<tr><td height="10"></td></tr>
         		<table border="0" cellpadding="0" cellspacing="0">
               <?php
-              for($ir=0; $ir<$num_row; $ir++){
+              for($ir=0;$ir<$num_row;$ir++){
                 ?>
 				<tr>
           <?php
             for($ic=0; $ic<$num_col; $ic++){
-              if($icount < $page_line-1 ){
-                while ($row = mysqli_fetch_array( $result ) ) {
+              if($icount < $total_rows){
+                $row = mysqli_fetch_array($result);
                 ?>
 					<td width="150" height="205" align="center" valign="top">
 						<table border="0" cellpadding="0" cellspacing="0" width="100" class="cmfont">
@@ -88,20 +89,21 @@ $icount=0;
 								</td>
 							</tr>
 							<tr><td height="20" align="center"><b><?= $row['productprice']?>원</b></td></tr>
+              	</td>
 						</table>
               <?php
             }
-          }
           else
+          ?>
+          <td></td>
+          <?php
             $icount++;
           }
           ?>
-					</td>
         </tr>
-              	<tr><td height="10"></td></tr>
-                <?php
-                }
-                ?>
+        <?php
+      }
+        ?>
       </table>
           <?php
           mysqli_close($conn);
@@ -118,6 +120,9 @@ $icount=0;
 				</tr>
 			</table>
     </div>
+        <?php
+        mysqli_close($conn);
+        ?>
 <?php
 include '../footer.php';
 ?>
