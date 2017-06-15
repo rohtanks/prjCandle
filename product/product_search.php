@@ -30,10 +30,17 @@ $result = mysqli_query ( $conn, $query );
 				<tr bgcolor="8B9CBF"><td height="1" colspan="5"  bgcolor="AAAAAA"></td></tr>
 				<tr height="70">
 					<td width="80" align="center" valign="middle">
+<<<<<<< HEAD
 						<a href="product_detail.php?no=<?= $row['productno']?>"><img src="<?= $row['productimage1']?>" width="60" height="60" border="0"></a>
 					</td>
 					<td align="left" valign="middle">
 						<a href="product_detail.php?no=<?= $row['productno']?>"><font color="#4186C7"><?= $row['productname']?></font></a><br>
+=======
+						<a href="product_detail.php?no=1"><img src="<?= $row['productimage1']?>" width="60" height="60" border="0"></a>
+					</td>
+					<td align="left" valign="middle">
+						<a href="product_detail.php?no=1"><font color="#4186C7"><?= $row['productname']?></font></a><br>
+>>>>>>> origin/local
 						<img src="../img/i_hit.gif" align="absmiddle" vspace="1"> <img src="../img/i_new.gif" align="absmiddle" vspace="1">
 					</td>
 					<td width="150" align="right" valign="middle"><?= $row['productprice']?>원</td>
