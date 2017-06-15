@@ -1,3 +1,4 @@
+
 <?php
 include '../config.php';
 include '../common.php';
@@ -410,6 +411,7 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 		});
 	});
 // 엔터키 폼 전송 방지 끝
+
 
 </script>
 <!-- 	다음 주소 검색 서비스 시작 -->
