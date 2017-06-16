@@ -1,7 +1,16 @@
-
 <?php
 include '../config.php';
 include '../common.php';
+// 회원가입 페이지에서 로그인을 할 경우 세션이 부여됐음에도 직전 페이지인 회원가입 페이지로 돌아가는 것을 방지하기 위해
+// 세션이 부여되었다면 직전 작업페이지가 회원가입 페이지에 한해 메인 페이지로 보냄
+// TODO loginOk.php에서 돌리는 방법과 이 방법 둘 중 하나 테스트 필요
+// if (!isset($_SESSION)) {
+// 	session_start();
+// }
+// if (isset($_SESSION['login_user'])) {
+// 	header('Location: '.$domainName.'prjCandle/view/index.php');
+// }
+// TODO url을 직접 입력해서 접근하는 것을 방지해야 함
 ?>
 <script src="https://code.jquery.com/jquery-3.2.1.js"
 	integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
@@ -9,28 +18,7 @@ include '../common.php';
 
 <!-- 추후 css로 이동 -->
 <style type="text/css">
-body .layerbox#register_auth div.wrapper div.body dl.form1 dd input.text
-	{
-	width: 260px;
-	margin-right: auto;
-	padding: 5px;
-	font-size: 1.2em;
-}
 
-html, span, applet, object, iframe, h3, h4, h5, h6, p,
-	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
-	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
-	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
-	table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
-	details, figcaption, figure, footer, header, hgroup, menu, nav, section,
-	summary, time, mark, audio, video {
-	margin: 0;
-	padiing: 0;
-	border: 0;
-	outline: 0;
-	font-size: 100%;
-	vertical-align: baseline;
-}
 
 body .layerbox#register_auth div.wrapper div.body dl.form1 dt {
 	text-align: left;
@@ -54,6 +42,17 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd p.notice {
 body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 	font-size: 11px;
 }
+
+.info_error {
+    border: 1px solid #f2685e;
+    background: #fffafa;
+}
+
+.wrap_typing {
+    border: 1px solid #5a94fd;
+    background: #fafcff;
+}
+
 </style>
 
 <div class="row">
@@ -65,7 +64,7 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 			</h2>
 
 			<div class="entry-area">
-				<div class="layerbox" id="register_auth"">
+				<div class="layerbox" id="register_auth">
 					<div class="wrapper table">
 						<div class="header"></div>
 						<div class="body">
@@ -84,51 +83,63 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 											height="15px"> <label for="mem_name">이름</label>
 									</dt>
 									<dd>
-										<input type="text" id="mem_name" name="mem_name" /><br> <span
-											id="nameCheck_msg" class="txt_message"></span>
+										<div>
+											<input type="text" id="mem_name" name="mem_name" /><br>
+											<span id="nameCheck_msg" class="txt_message"></span>
+										</div>
 									</dd>
 									<dt>
 										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
 											height="15px"> <label for="mem_nickname">아이디</label>
 									</dt>
 									<dd>
-										<input type="text" id="mem_nickname" name="mem_nickname" />
-										<p class="notice" id="msg_mb_id">영문자, 숫자, _ 만 입력 가능.</p>
-										<br> <span id="idCheck_msg" class="txt_message"></span>
+										<div>
+											<input type="text" id="mem_nickname" name="mem_nickname" />
+											<p class="notice" id="msg_mb_id">영문자, 숫자, _ 만 입력 가능.</p><br>
+											<span id="idCheck_msg" class="txt_message"></span>
+										</div>
 									</dd>
 									<dt>
 										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
 											height="15px"> <label for="mem_pw">비밀번호</label>
 									</dt>
 									<dd>
-										<input type="password" id="mem_pw" name="mem_pw" />
-										<p class="notice" id="msg_mb_pw">비밀번호는 8글자 이상 적어도 한개 이상의
-											영대소문자, 숫자, 특수문자(!@#$%^&*+=-)를 입력하세요.</p>
-										<br> <span id="pwCheck_msg" class="txt_message"></span>
+										<div>
+											<input type="password" id="mem_pw" name="mem_pw" />
+											<p class="notice" id="msg_mb_pw">비밀번호는 8글자 이상 적어도 한개 이상의
+											영대소문자, 숫자, 특수문자(!@#$%^&*+=-)를 입력하세요.</p><br>
+											<span id="pwCheck_msg" class="txt_message"></span>
+										</div>
 									</dd>
 									<dt>
 										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
 											height="15px"> <label for="pw2">비밀번호 확인</label>
 									</dt>
 									<dd>
-										<input type="password" id="mem_pw2" name="mem_pw2" />
-										<p class="notice" id="msg_mb_pw_re">비밀번호를 다시한번 입력하세요.</p>
+										<div>
+											<input type="password" id="mem_pw2" name="mem_pw2" />
+											<p class="notice" id="msg_mb_pw_re">비밀번호를 다시한번 입력하세요.</p>
+										</div>
 									</dd>
 									<dt>
 										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
 											height="15px"> <label for="mem_phoneNum">휴대폰 번호</label>
 									</dt>
 									<dd>
-										<input type="text" id="mem_phoneNum" name="mem_phoneNum" /><br>
-										<span id="phoneNumCheck_msg" class="txt_message"></span>
+										<div>
+											<input type="text" id="mem_phoneNum" name="mem_phoneNum" /><br>
+											<span id="phoneNumCheck_msg" class="txt_message"></span>
+										</div>
 									</dd>
 									<dt>
 										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
 											height="15px"> <label for="mem_email">이메일 주소</label>
 									</dt>
 									<dd>
-										<input type="email" id="mem_email" name="mem_email" /><br> <span
-											id="emailCheck_msg" class="txt_message"></span>
+										<div>
+											<input type="email" id="mem_email" name="mem_email" /><br>
+											<span id="emailCheck_msg" class="txt_message"></span>
+										</div>
 									</dd>
 									<dt>
 										<img src="<?=$domainName?>prjcandle/img/check_icon.png"
@@ -195,179 +206,226 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 		var btn_submit = $('#btn_submit');
 		var nameFlag = 0, idFlag = 0, pwFlag = 0, pw2Flag = 0, phoneNumFlag = 0, emailFlag = 0, addrFlag = 0; // 각 유효성 체크가 성공했는지 판단하기 위한 변수
 
+ 		// typing 클래스 추가 함수
+		var typeFunc = function () { // javascript this는 이벤트가 발생한 태그, jquery의 $(this)는 이벤트가 발생한 요소들의 정보
+			$(this).addClass('wrap_typing');
+		};
+		// error 클래스 변경 함수 
+		var errorFunc = function () { // TODO 아 왜 이 함수가 안 먹히는지 모르겠네
+			$(this).attr('class', 'info_error');
+		};
+		// 클래스 제거 함수
+		var rmClassFunc = function () { // TODO 이것도 안먹히네
+			$(this).removeClass();
+		}
+		
 		// 이름 유효성 체크 시작
-		inputName.blur(function check_valName(){
-			if (inputName.val().trim() == "") { // 스페이스바만 눌렀을 경우를 확인하기 위해 trim() 사용
-				nameCheckMsg.html('이름을 입력해 주세요.');
-				nameFlag = 0;
-				return false;
-			} else if (!pattern_valName.test(inputName.val())) {
-				nameCheckMsg.html('사용할 수 없는 문자가 있어요. 한글(성과 이름을 공백없이 입력) 또는 영문만 입력해 주세요.');
-				nameFlag = 0;
-				return false;
-			} /* else if (pattern_valHGName.test(inputName.val())) {
-// 				if (pattern_valHGNamet.test(inputName.val())) {
-// 					nameCheckMsg.html('한글(성과 이름을 공백없이 입력) 입력해 주세요.');
-
-// 				}
-				return false;
-			} */ else {
-				nameFlag = 1;
-				nameCheckMsg.html('');
+		inputName.on({ // on() 이벤트 연결 함수
+			click: typeFunc,
+			blur: function check_valName() {
+				if ($(this).val().trim() == "") { // 스페이스바만 눌렀을 경우를 확인하기 위해 trim() 사용
+					nameCheckMsg.html('이름을 입력해 주세요.');
+					$(this).attr('class','info_error'); // 함수에 들어가면 안먹힘
+					nameFlag = 0;
+					return false;
+				} else if (!pattern_valName.test($(this).val())) {
+					nameCheckMsg.html('사용할 수 없는 문자가 있어요. 한글(성과 이름을 공백없이 입력) 또는 영문만 입력해 주세요.');
+					$(this).attr('class','info_error');
+					nameFlag = 0;
+					return false;
+				} else { // TODO 한글은 공백 없이 입력하도록 유도
+					$(this).removeClass();
+					nameFlag = 1;
+					nameCheckMsg.html('');
+				}
 			}
 		});
 		// 이름 유효성 체크 끝
 		// ID 유효성 체크 시작
-		inputId.blur(function check_valId(){ // keyup 으로 했을 경우 조건을 충족하지 못했을 경우에도 입력 바로 후에 사용 가능한 아이디로 바뀜 그래서 blur로 대체
-			var spaceCheck = inputId.val().indexOf(" ");
-
-			if (inputId.val().trim() == "") { // 스페이스바만 눌렀을 경우를 확인하기 위해 trim() 사용
-				idCheckMsg.html('아이디를 입력해 주세요.');
-				idFlag = 0;
-				//inputId.focus(); // TODO 포커스 대체품을 찾아야한다
-				return false;
-			} else if (inputId.val().length < 4) {
-				idCheckMsg.html('조금 더! 아이디는 4자 이상이에요!');
-				idFlag = 0;
-				return false;
-			} else if (spaceCheck != -1) { // 입력 내용에 공백이 없을 경우 -1을 반환, IE에서 includes()를 지원하지 않는 이슈 발생 indexOf로 대체함
-				idCheckMsg.html('아이디에 공백이 있습니다.');
-				idFlag = 0;
-				return false;
-			} else if (pattern_onlyNumber.test(inputId.val())) { // 숫자만 입력했을 경우
-				idCheckMsg.html('숫자로 된 아이디는 사용할 수 없어요. 영문 소문자를 추가해서 다시 입력해 주세요.');
-				idFlag = 0;
-				return false;
-			} else if (!pattern_valId.test(inputId.val())) { // 영문 소문자, 숫자, _ 이외의 문자를 입력했을 경우
-				idCheckMsg.html('영문 소문자와 숫자 또는 "_"기호 조합으로 입력하세요.');
-				idFlag = 0;
-				return false;
-			} else {
-			    $.ajax({
-			     	type: "POST",
-			     	url: "../member/idCheck.php", // 이페이지에서 중복체크를 한다
-			     	data: {"id":inputId.val()}, // idCheck.php에 id 값을 보낸다
-			     	success: function(data){
-						console.log(data);
-						if (data == "NO") {
-							idCheckMsg.html('이미 사용된 아이디가 있습니다. 다른 아이디를 입력해 주세요.');
-							idFlag = 0;
-						} else {
-							idCheckMsg.html('사용 가능한 아이디입니다.');
-							idFlag = 1;
-						}
-			     	}
-			    });
+		inputId.on({
+			click: typeFunc,
+			blur: function check_valId() { // keyup 으로 했을 경우 조건을 충족하지 못했을 경우에도 입력 바로 후에 사용 가능한 아이디로 바뀜 그래서 blur로 대체
+				var spaceCheck = inputId.val().indexOf(" ");
+	
+				if (inputId.val().trim() == "") { // 스페이스바만 눌렀을 경우를 확인하기 위해 trim() 사용
+					idCheckMsg.html('아이디를 입력해 주세요.');
+					$(this).attr('class','info_error');
+					idFlag = 0;
+					//inputId.focus(); // TODO 포커스 대체품을 찾아야한다
+					return false;
+				} else if (inputId.val().length < 4) {
+					idCheckMsg.html('조금 더! 아이디는 4자 이상이에요!');
+					$(this).attr('class','info_error');
+					idFlag = 0;
+					return false;
+				} else if (spaceCheck != -1) { // 입력 내용에 공백이 없을 경우 -1을 반환, IE에서 includes()를 지원하지 않는 이슈 발생 indexOf로 대체함
+					idCheckMsg.html('아이디에 공백이 있습니다.');
+					$(this).attr('class','info_error');
+					idFlag = 0;
+					return false;
+				} else if (pattern_onlyNumber.test(inputId.val())) { // 숫자만 입력했을 경우
+					idCheckMsg.html('숫자로 된 아이디는 사용할 수 없어요. 영문 소문자를 추가해서 다시 입력해 주세요.');
+					$(this).attr('class','info_error');
+					idFlag = 0;
+					return false;
+				} else if (!pattern_valId.test(inputId.val())) { // 영문 소문자, 숫자, _ 이외의 문자를 입력했을 경우
+					idCheckMsg.html('영문 소문자와 숫자 또는 "_"기호 조합으로 입력하세요.');
+					$(this).attr('class','info_error');
+					idFlag = 0;
+					return false;
+				} else {
+				    $.ajax({
+				     	type: "POST",
+				     	url: "../member/idCheck.php", // 이페이지에서 중복체크를 한다
+				     	data: {"id":inputId.val()}, // idCheck.php에 id 값을 보낸다
+				     	success: function(data){
+							console.log(data);
+							if (data == "NO") {
+								idCheckMsg.html('이미 사용된 아이디가 있습니다. 다른 아이디를 입력해 주세요.');
+								inputId.attr('class','info_error'); // $(this)는 메서드 내로만 범위가 한정되는듯
+								idFlag = 0;
+							} else {
+								idCheckMsg.html('사용 가능한 아이디입니다.');
+								inputId.removeClass();
+								idFlag = 1;
+							}
+				     	}
+				    });
+				}
 			}
 	    });
 		// ID 유효성 체크 끝
 		// 비밀번호 유효성 체크 시작
-		inputPw.keyup(function check_valPw(){ // keyup 함수는 키가 입력되는 순간 작동
-			var checkEnglish = inputPw.val().search(/[a-z]/gi);
-			var checkSpecial = inputPw.val().search(/[!@#$%^&*+=-]/g);
-
-			if (!inputPw.val()) { // empty
-				pwCheckMsg.html('');
-				pwFlag = 0;
-				return false;
-			} else if (inputPw.val().length < 8) {
-				pwCheckMsg.html('조금 더! 비밀번호는 8자 이상이에요!');
-				console.log(inputPw.val());
-				pwFlag = 0;
-				return false;
-			} else if (pattern_onlyNumber.test(inputPw.val())) {
-				pwCheckMsg.html('숫자로 된 비밀번호는 사용할 수 없어요! 영문자, 특수문자를 함께 입력해 주세요.');
-				console.log(inputPw.val());
-				pwFlag = 0;
-				return false;
-			} else if (checkEnglish <0 || checkSpecial <0) {
-				pwCheckMsg.html('숫자와 영문자, 특수문자를 모두 사용해야 합니다.');
-				console.log(inputPw.val());
-				pwFlag = 0;
-				return false;
-			} /* else if (inputPw.val().search(inputId.val()) > -1) { // TODO search는 몇번째 인덱스에서 검색됐는지 반환, 문제가 많아서 잠시 보류
-				pwCheckMsg.html('비밀번호에 아이디가 포함됐습니다.');
-				console.log(inputPw.val().search(inputId.val()));
-				return false;
-			} */ else if (pattern_valPw.test(inputPw.val())) {
-				pwCheckMsg.html('사용가능');
-				console.log(inputPw.val());
-				pwFlag = 1;
+		inputPw.on({
+			click: typeFunc,
+			keyup: function check_valPw(){ // keyup 함수는 키가 입력되는 순간 작동
+				var checkEnglish = inputPw.val().search(/[a-z]/gi);
+				var checkSpecial = inputPw.val().search(/[!@#$%^&*+=-]/g);
+	
+				if (!inputPw.val()) { // empty
+					pwCheckMsg.html('');
+					$(this).attr('class','info_error');
+					pwFlag = 0;
+					return false;
+				} else if (inputPw.val().length < 8) {
+					pwCheckMsg.html('조금 더! 비밀번호는 8자 이상이에요!');
+					$(this).attr('class','info_error');
+					pwFlag = 0;
+					return false;
+				} else if (pattern_onlyNumber.test(inputPw.val())) {
+					pwCheckMsg.html('숫자로 된 비밀번호는 사용할 수 없어요! 영문자, 특수문자를 함께 입력해 주세요.');
+					$(this).attr('class','info_error');
+					pwFlag = 0;
+					return false;
+				} else if (checkEnglish <0 || checkSpecial <0) {
+					pwCheckMsg.html('숫자와 영문자, 특수문자를 모두 사용해야 합니다.');
+					$(this).attr('class','info_error');
+					pwFlag = 0;
+					return false;
+				} /* else if (inputPw.val().search(inputId.val()) > -1) { // TODO search는 몇번째 인덱스에서 검색됐는지 반환, 문제가 많아서 잠시 보류
+					pwCheckMsg.html('비밀번호에 아이디가 포함됐습니다.');
+					return false;
+				} */ else if (pattern_valPw.test(inputPw.val())) {
+					pwCheckMsg.html('사용가능');
+					$(this).removeClass();
+					pwFlag = 1;
+				}
 			}
 		});
 		// 비밀번호 유효성 체크 끝
 		// 비밀번호 확인 체크 시작
-		inputPw2.blur(function check_valPw2(){ // TODO 비밀번호 확인을 먼저 입력하고 비밀번호를 입력할 시 일치되지 않는 문제 해결해야 함
-			if (inputPw.val() != inputPw2.val()) {
-				console.log(inputPw2.val());
-				console.log('불일치');
-				pw2Flag = 0;
-				return false;
-			} else {
-				console.log('일치'); // TODO 비밀번호 일치 시 체크표시
-				pw2Flag = 1;
+		inputPw2.on({
+			click: typeFunc,	
+			blur: function check_valPw2(){ // TODO 비밀번호 확인을 먼저 입력하고 비밀번호를 입력할 시 일치되지 않는 문제 해결해야 함
+				if (inputPw.val() != inputPw2.val()) {
+					$(this).attr('class','info_error');
+					console.log('불일치');
+					pw2Flag = 0;
+					return false;
+				} else {
+					$(this).removeClass();
+					console.log('일치'); // TODO 비밀번호 일치 시 체크표시
+					pw2Flag = 1;
+				}
 			}
 		});
 		// 비밀번호 확인 체크 끝
 		// 휴대폰 번호 유효성 체크 시작
-		inputPhoneNum.blur(function check_valPhoneNum(){
-			var hyphenCheck = inputPhoneNum.val().indexOf("-");
-			var nonHyphenNum = inputPhoneNum.val().replace(/-/gi, ''); // 하이픈 제거
-			console.log(hyphenCheck);
-			if (hyphenCheck > -1) { // inputPhoneNum에 하이픈이 있을 경우
-				console.log(nonHyphenNum);
-				if (nonHyphenNum.trim() == "") {
-					phoneNumFlag = 0;
-					phoneNumCheckMsg.html('휴대폰 번호를 입력해 주세요.');
-					return false;
-				} else if (!pattern_noHyphenNum.test(nonHyphenNum)) {
-					phoneNumFlag = 0;
-					phoneNumCheckMsg.html('잘못된 휴대폰 번호 입니다. 휴대폰 번호를 확인한 후 다시 입력해 주세요.');
-					return false;
-				} else if (!pattern_onlyNumber.test(nonHyphenNum)) {
-					phoneNumFlag = 0;
-					phoneNumCheckMsg.html('잘못된 휴대폰 번호 입니다. 휴대폰 번호를 확인한 후 다시 입력해 주세요.');
-					return false;
-				} else {
-					phoneNumFlag = 1;
-					inputPhoneNum.val(nonHyphenNum); // 하이픈 제거한 번호를 inputPhoneNum에 입력
-					phoneNumCheckMsg.html('');
-					console.log('정상적인 휴대폰 번호');
-				}
-			} else { // inputPhoneNum에 하이픈이 없을 경우
-				if (inputPhoneNum.val().trim() == "") {
-					phoneNumFlag = 0;
-					phoneNumCheckMsg.html('휴대폰 번호를 입력해 주세요.');
-					return false;
-				} else if (!pattern_noHyphenNum.test(inputPhoneNum.val())) {
-					phoneNumFlag = 0;
-					phoneNumCheckMsg.html('잘못된 휴대폰 번호 입니다. 휴대폰 번호를 확인한 후 다시 입력해 주세요.');
-					return false;
-				} else if (!pattern_onlyNumber.test(inputPhoneNum.val())) {
-					phoneNumFlag = 0;
-					phoneNumCheckMsg.html('잘못된 휴대폰 번호 입니다. 휴대폰 번호를 확인한 후 다시 입력해 주세요.');
-					return false;
-				} else {
-					phoneNumFlag = 1;
-					phoneNumCheckMsg.html('');
-					console.log('정상적인 휴대폰 번호');
+		inputPhoneNum.on({
+			click: typeFunc,
+			blur: function check_valPhoneNum(){
+				var hyphenCheck = inputPhoneNum.val().indexOf("-");
+				var nonHyphenNum = inputPhoneNum.val().replace(/-/gi, ''); // 하이픈 제거
+				console.log(hyphenCheck);
+				if (hyphenCheck > -1) { // inputPhoneNum에 하이픈이 있을 경우
+					console.log(nonHyphenNum);
+					if (nonHyphenNum.trim() == "") {
+						phoneNumCheckMsg.html('휴대폰 번호를 입력해 주세요.');
+						$(this).attr('class','info_error');
+						phoneNumFlag = 0;
+						return false;
+					} else if (!pattern_noHyphenNum.test(nonHyphenNum)) {
+						phoneNumCheckMsg.html('잘못된 휴대폰 번호 입니다. 휴대폰 번호를 확인한 후 다시 입력해 주세요.');
+						$(this).attr('class','info_error');
+						phoneNumFlag = 0;
+						return false;
+					} else if (!pattern_onlyNumber.test(nonHyphenNum)) {
+						phoneNumCheckMsg.html('잘못된 휴대폰 번호 입니다. 휴대폰 번호를 확인한 후 다시 입력해 주세요.');
+						$(this).attr('class','info_error');
+						phoneNumFlag = 0;
+						return false;
+					} else {
+						phoneNumFlag = 1;
+						phoneNumCheckMsg.html('');
+						inputPhoneNum.val(nonHyphenNum); // 하이픈 제거한 번호를 inputPhoneNum에 입력
+						$(this).removeClass();
+						console.log('정상적인 휴대폰 번호');
+					}
+				} else { // inputPhoneNum에 하이픈이 없을 경우
+					if (inputPhoneNum.val().trim() == "") {
+						phoneNumCheckMsg.html('휴대폰 번호를 입력해 주세요.');
+						$(this).attr('class','info_error');
+						phoneNumFlag = 0;
+						return false;
+					} else if (!pattern_noHyphenNum.test(inputPhoneNum.val())) {
+						phoneNumCheckMsg.html('잘못된 휴대폰 번호 입니다. 휴대폰 번호를 확인한 후 다시 입력해 주세요.');
+						$(this).attr('class','info_error');
+						phoneNumFlag = 0;
+						return false;
+					} else if (!pattern_onlyNumber.test(inputPhoneNum.val())) {
+						phoneNumCheckMsg.html('잘못된 휴대폰 번호 입니다. 휴대폰 번호를 확인한 후 다시 입력해 주세요.');
+						$(this).attr('class','info_error');
+						phoneNumFlag = 0;
+						return false;
+					} else {
+						phoneNumCheckMsg.html('');
+						$(this).removeClass();
+						phoneNumFlag = 1;
+						console.log('정상적인 휴대폰 번호');
+					}
 				}
 			}
 		});
 		// 휴대폰 번호 유효성 체크 끝
 		// 이메일 유효성 체크 시작
-		inputEmail.blur(function check_valEmail(){
-			if (inputEmail.val().trim() == "") {
-				emailCheckMsg.html('이메일을 입력해 주세요.');
-				emailFlag = 0;
-				return false;
-			} else if (!pattern_valEmail.test(inputEmail.val())) {
-				emailCheckMsg.html('이메일 주소 형식이 아닙니다. 본인확인이 가능한 이메일 주소를 입력해 주세요.');
-				emailFlag = 0;
-				return false;
-			} else {
-				emailCheckMsg.html('');
-				emailFlag = 1;
+		inputEmail.on({
+			click: typeFunc,
+			blur: function check_valEmail(){
+				if (inputEmail.val().trim() == "") {
+					emailCheckMsg.html('이메일을 입력해 주세요.');
+					$(this).attr('class','info_error');
+					emailFlag = 0;
+					return false;
+				} else if (!pattern_valEmail.test(inputEmail.val())) {
+					emailCheckMsg.html('이메일 주소 형식이 아닙니다. 본인확인이 가능한 이메일 주소를 입력해 주세요.');
+					$(this).attr('class','info_error');
+					emailFlag = 0;
+					return false;
+				} else {
+					emailCheckMsg.html('');
+					$(this).removeClass();
+					emailFlag = 1;
+				}
 			}
 		});
 		// 이메일 유효성 체크 끝
@@ -393,7 +451,7 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 			if (nameFlag && idFlag && pwFlag && pw2Flag && phoneNumFlag && emailFlag && addrFlag == 1) { // 모든 유효성 체크가 성공해야 submit을 할 수 있다
 				form.submit();
 			} else {
-				// TODO 유효성 체크가 성공하지 않은 input 태그의 테두리 색 변화
+				alert('모든 필수 항목을 입력해 주세요.');
 			}
 		});
 		// 폼 전송 체크 끝

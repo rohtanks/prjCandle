@@ -1,5 +1,5 @@
 <?php
-include '../member/dbConfig.php';
+include '../dbConfig.php';
 
 // 게시판 테이블 생성
 $sql_create_board = "CREATE TABLE `board` (

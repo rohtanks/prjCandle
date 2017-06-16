@@ -1,9 +1,10 @@
 <?php
 session_start();
-$login_user = $_SESSION['login_user'];
 include '../config.php';
 include '../dbConfig.php';
 include '../common.php';
+
+$login_user = (isset($_SESSION['login_user']) && $_SESSION['login_user']) ? $_SESSION['login_user'] : NULL; // 세션변수가 없을 땐 null로 명시
 
 $id = $_GET ['id'];
 if (!isset($_GET['page'])) {
@@ -15,28 +16,16 @@ if (!isset($_GET['page'])) {
 $sql_select_one = "SELECT * FROM board WHERE brd_id = '" . $id . "'";
 $result_one = mysqli_query ( $conn, $sql_select_one );
 $row = mysqli_fetch_assoc ( $result_one );
-
 // 글 작성자와 세션 사용자를 비교하기 위한 변수
 $writer = $row['brd_writer'];
+
+// 조회수 증가
+$sql_update_check = "UPDATE board SET brd_check = brd_check + 1 WHERE brd_id = '". $id ."'"; // TODO 새로고침이나 같은 사용자로 인해 조회수가 중복 증가되는것 방지 필요
+mysqli_query($conn, $sql_update_check);
 ?>
 
 <body>
 	<div class="box">
-	<table>
-		<tr>
-			<td>
-				<?php
-// 				수정하기와 삭제하기 버튼은 세션 사용자와 글 작성자를 비교하여 노출
-				if ($login_user == $writer) {
-				?>
-				<a href="<?=$domainName?>prjcandle/board/write.php?id=<?= $id ?>&mode=modify">수정하기</a>
-				<a href="<?=$domainName?>prjcandle/board/delete.php?id=<?= $id ?>">삭제하기</a>
-				<?php
-				}
-				?>
-			</td>
-		</tr>
-	</table>
 	<table>
 		<tr>
 			<td colspan="2"><strong><?= $row['brd_title']?></strong></td>
@@ -51,26 +40,43 @@ $writer = $row['brd_writer'];
 			<td>조회수: <?= $row['brd_check']?> / 추천수: <?= $row['brd_like']?></td>
 		</tr>
 		<tr>
+			<td align="right">
+				<?php
+// 				수정하기와 삭제하기 버튼은 세션 사용자와 글 작성자를 비교하여 노출
+				if ($login_user == $writer) { // TODO 로그인 하지 않고 글을 볼 땐 어떻게 해야하지? -> 해결(3번째 줄)
+				?>
+				<a href="<?=$domainName?>prjcandle/view/write.php?id=<?= $id ?>&mode=modify">수정하기</a>
+				<a href="<?=$domainName?>prjcandle/board/delete.php?id=<?= $id ?>">삭제하기</a>
+				<?php
+				}
+				?>
+			</td>
+		</tr>
+		<tr>
 			<td colspan="2"><?= $row['brd_content']?></td>
 		</tr>
 	</table>
-	<table>
+	<div>
 		<?php
 		if (! isset ( $_SESSION ['login_user'] )) {
 		?>
 		<!-- 로그인 전 -->
-				<a href='<?=$domainName?>prjCandle/view/login.php'>로그인</a>
-		<?php
-		} else {
-		?>
-		<!-- 로그인 후 -->
-		<a href="<?=$domainName?>prjcandle/view/list.php?page=<?= $page ?>">목록보기</a>
-		<a href="<?=$domainName?>prjcandle/view/write.php?mode=write">글쓰기</a>
+			<a href='<?=$domainName?>prjCandle/view/login.php'>로그인</a>
 		<?php
 		}
 		?>
-
-	</table>
+		<a href="<?=$domainName?>prjcandle/view/list.php?page=<?= $page ?>">목록보기</a>
+		<a href="<?=$domainName?>prjcandle/view/write.php?mode=write">글쓰기</a>
+	</div>
+<!-- 	댓글 쓰기 시작(로그인 해서만 가능) -->
+	<div>
+		<form action="">
+			<input type="text" />
+		</form>
+	</div>
+<!-- 	댓글 쓰기 끝 -->
+	
+	
 <!-- 	이전글 다음글 보기 -->
 	<?php
 	// 이전글 보기 버튼
