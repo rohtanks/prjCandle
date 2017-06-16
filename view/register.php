@@ -10,6 +10,7 @@ include '../common.php';
 // if (isset($_SESSION['login_user'])) {
 // 	header('Location: '.$domainName.'prjCandle/view/index.php');
 // }
+// TODO url을 직접 입력해서 접근하는 것을 방지해야 함
 ?>
 <script src="https://code.jquery.com/jquery-3.2.1.js"
 	integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
