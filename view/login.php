@@ -38,6 +38,7 @@ if (isset($login_user)) {
 						<input type="hidden" name="save" value="contact">
 						<button type="submit" class="btn btn-default">로그인</button>
 					</div>
+
 				</div>
 			</form>
 		</div>

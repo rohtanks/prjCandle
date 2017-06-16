@@ -470,6 +470,7 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 	});
 // 엔터키 폼 전송 방지 끝
 
+
 </script>
 <!-- 	다음 주소 검색 서비스 시작 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
