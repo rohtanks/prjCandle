@@ -14,9 +14,7 @@ $row = mysqli_fetch_assoc ( $result );
 <meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
 <LINK REL="STYLESHEET" HREF="include/css.css" TYPE="text/css">
 </head>
-
 <body  marginwidth="0" marginheight="0" bgcolor="eeeeee">
-
 <table width="540" height="520" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td height="37" colspan="2"><img src="../img/zoom_title.gif" width="540" height="41"></td>
