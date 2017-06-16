@@ -120,9 +120,6 @@ $total_rows = mysqli_num_rows($result);
 				</tr>
 			</table>
     </div>
-        <?php
-        mysqli_close($conn);
-        ?>
 <?php
 include '../footer.php';
 ?>
