@@ -14,8 +14,6 @@ $result = mysqli_query ( $conn, $query );
 		<div class="box" style="padding-left: 600px;">
 	<tr>
 		<td width="730" align="center" valign="top" bgcolor="#FFFFFF">
-
-
 			<table width="686" border="0" cellpadding=0 cellspacing=0 class="cmfont">
 				<tr bgcolor="8B9CBF"><td height="3" colspan="5"></td></tr>
 				<tr height="29" bgcolor="EEEEEE">
@@ -30,27 +28,22 @@ $result = mysqli_query ( $conn, $query );
 				<tr bgcolor="8B9CBF"><td height="1" colspan="5"  bgcolor="AAAAAA"></td></tr>
 				<tr height="70">
 					<td width="80" align="center" valign="middle">
-<<<<<<< HEAD
 						<a href="product_detail.php?no=<?= $row['productno']?>"><img src="<?= $row['productimage1']?>" width="60" height="60" border="0"></a>
 					</td>
 					<td align="left" valign="middle">
 						<a href="product_detail.php?no=<?= $row['productno']?>"><font color="#4186C7"><?= $row['productname']?></font></a><br>
-=======
 						<a href="product_detail.php?no=1"><img src="<?= $row['productimage1']?>" width="60" height="60" border="0"></a>
 					</td>
 					<td align="left" valign="middle">
 						<a href="product_detail.php?no=1"><font color="#4186C7"><?= $row['productname']?></font></a><br>
->>>>>>> origin/local
 						<img src="../img/i_hit.gif" align="absmiddle" vspace="1"> <img src="../img/i_new.gif" align="absmiddle" vspace="1">
 					</td>
 					<td width="150" align="right" valign="middle"><?= $row['productprice']?>원</td>
 					<td width="20"></td>
 				</tr>
 				<tr><td align="center" valign="middle" colspan="5" height="1" background="../img/ln1.gif"></td></tr>
-
         <?php
         }
-
         mysqli_close($conn);
         ?>
 				<tr bgcolor="8B9CBF"><td height="3" colspan="5"></td></tr>
@@ -69,11 +62,9 @@ $result = mysqli_query ( $conn, $query );
 		</td>
 	</tr>
 </table>
-
 </td>
 </tr>
 </div>
-
 <?php
 include '../footer.php';
 ?>
