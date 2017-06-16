@@ -29,7 +29,7 @@ echo "레벨 - ".$level."인 ".$_SESSION['super_user']."님 반갑습니다.";
 	<?php 
 	}
 	?>
-	<a href="<?=$domainName?>prjCandle/admin/view/product.php">상품 관리</a>
+	<a href="<?=$domainName?>prjCandle/view/product.php">상품 관리</a>
 	<a href="<?=$domainName?>prjCandle/admin/logout.php">로그아웃</a>
 </body>
 </html>
