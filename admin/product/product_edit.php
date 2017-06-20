@@ -13,7 +13,7 @@ include '../dbConfig.php';
 
 <body style="margin:0">
 
-<form name="form1" method="post" action="product_update.php" enctype="multipart/form-data">
+<form name="form1" method="post" action="product_update.php?no=<?=$no?>" enctype="multipart/form-data">
 
 <input type="hidden" name="sel1" value="">
 <input type="hidden" name="sel2" value="">
