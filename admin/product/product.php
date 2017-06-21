@@ -58,7 +58,7 @@ $total_rows = mysqli_num_rows($result);
 		<td width="280">&nbsp <?=$row['productprice']?></td>
 		<td width="80"  align="center">
 			<a href="product_edit.php?no=<?=$row['productno']?>&sel1=<?=$row['productname']?>&text1=<?=$row['productprice']?>&img1=<?=$row['productimage1']?>&img2=<?=$row['productimage2']?>&img3=<?=$row['productimage3']?>">수정</a>/
-			<a href="product_delete.php?no=1&sel1=&text1&page=1" onclick="javascript:return confirm('삭제할까요 ?');">삭제</a>
+			<a href="product_delete.php?no=<?=$row['productno']?>" onclick="javascript:return confirm('삭제할까요 ?');">삭제</a>
 		</td>
 		<?php
 		}
