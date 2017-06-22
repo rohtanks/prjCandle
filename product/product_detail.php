@@ -58,7 +58,7 @@ $row = mysqli_fetch_array( $result );
 
 			<!-- form2 시작  -->
 			<form name="form2" method="post" action="">
-			<input type="hidden" name="no" value="0000">
+			<input type="hidden" name="no" value="<?= $row['productno']?>">
 			<input type="hidden" name="kind" value="insert">
 
 			<table border="0" cellpadding="0" cellspacing="0" width="745">
@@ -112,12 +112,14 @@ $row = mysqli_fetch_array( $result );
 										<option value="1">RED</option>
 										<option value="2">WHITE</option>
 									</select> &nbsp;
+                    <script>document.form2.opts1.value='<?=$opts1?>';</script>
 									<select name="opts2" class="cmfont1">
 										<option value="">선택하세요</option>
 										<option value="3">라벤다</option>
 										<option value="4">쟈스민</option>
 										<option value="5">암모니아</option>
 									</select>
+                  <script>document.form2.opts2.value='<?=$opts2?>';</script>
 								</td>
 							</tr>
 							<tr><td colspan="3" bgcolor="E8E7EA"></td></tr>

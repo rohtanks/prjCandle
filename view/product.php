@@ -1,20 +1,25 @@
 <?php
+error_reporting(0);
 if(!isset($_SESSION)){
      session_start();
 }
 include '../config.php';
 include '../common.php';
 include '../dbConfig.php';
-$query="SELECT * from product";
+$pageNum = ($_GET['page']) ? $_GET['page'] : 1;     //page : default - 1
+$list = ($_GET['list']) ? $_GET['list'] : 15; //page : default - 15
+$limit = ($pageNum - 1) * $list;
+
+$query="SELECT * from product limit $limit, $list";
 $sort= $_POST['sort'];
 if ($sort == "up"){
-  $query="SELECT * from product order by productprice desc";
+  $query="SELECT * from product order by productprice desc limit $limit, $list";
 } else if ($sort == "name"){
-  $query = "SELECT * from product order by productname";
+  $query = "SELECT * from product order by productname limit $limit, $list";
 } else if ($sort == "down"){
-  $query = "SELECT * from product order by productprice";
+  $query = "SELECT * from product order by productprice limit $limit, $list";
 } else if ($sort == "new"){
-  $query = "SELECT * from product order by productno desc";
+  $query = "SELECT * from product order by productno desc limit $limit, $list";
 }
 $result= mysqli_query ( $conn, $query );
 $total_rows = mysqli_num_rows($result);
@@ -105,20 +110,16 @@ $total_rows = mysqli_num_rows($result);
       }
         ?>
       </table>
-          <?php
-          mysqli_close($conn);
-          ?>
-			<table border="0" cellpadding="0" cellspacing="0" width="690">
-				<tr>
-					<td height="40" class="cmfont" align="center">
-						<img src="../img/i_prev.gif" align="absmiddle" border="0">
-						<font color="#FC0504"><b>1</b></font>&nbsp;
-						<a href="product.php?sort=1&page=1"><font color="#7C7A77">[2]</font></a>&nbsp;
-						<a href="product.php?sort=1&page=1"><font color="#7C7A77">[3]</font></a>&nbsp;
-						<img src="../img/i_next.gif" align="absmiddle" border="0">
-					</td>
-				</tr>
-			</table>
+      <?php
+      mysqli_close($conn);
+      ?>
+    <table border="0" cellpadding="0" cellspacing="0" align="center" width="690">
+      <tr>
+      <?php
+include '../product/product_paging.php';
+?>
+</tr>
+</table>
     </div>
 <?php
 include '../footer.php';
