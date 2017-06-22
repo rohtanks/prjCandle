@@ -1,4 +1,5 @@
 <?php
+// 미사용 페이지 (검색 기능이 없는 게시판에 이용 가능한 모듈)
 // 총 페이지 수($total_page)
 // 총 게시물 수 / 한 페이지에 보여질 게시물 수($total_row / $page_size)
 $total_page = ceil($total_row / $page_size);
