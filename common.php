@@ -102,7 +102,7 @@ include 'config.php';
 				if (! isset ( $_SESSION ['login_user'] )) {
 				?>
 	              <!-- 로그인 전 -->
-					<li><a href='<?=$domainName?>prjCandle/view/login.php'>로그인</a></li>
+					<li><a href='<?=$domainName?>prjCandle/product/cart.php'>장바구니</a></li>
 					<li><a href='<?=$domainName?>prjCandle/view/product.php'>상품소개</a></li>
 					<li><a href='<?=$domainName?>prjCandle/view/list.php'>게시판</a></li>
 					<li><a href='<?=$domainName?>prjCandle/view/about.php'>회사소개</a></li>
@@ -119,7 +119,7 @@ include 'config.php';
 				} else {
 				?>
 	              <!-- 로그인 후 -->
-					<li><a href='<?=$domainName?>prjCandle/member/logout.php'>로그아웃</a></li>
+					<li><a href='<?=$domainName?>prjCandle/product/cart.php'>장바구니</a></li>
 					<li><a href='<?=$domainName?>prjCandle/view/product.php'>상품소개</a></li>
 					<li><a href='<?=$domainName?>prjCandle/view/list.php'>게시판</a></li>
 					<li><a href='<?=$domainName?>prjCandle/view/about.php'>회사소개</a></li>

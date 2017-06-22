@@ -49,7 +49,6 @@ include '../dbConfig.php';
 			<input type="text" name="price" value="<?= $text1?>" size="12" maxlength="12"> 원
 		</td>
 	</tr>
-
 	<tr>
 		<td width="100" bgcolor="#CCCCCC" align="center">이미지</td>
 		<td width="700"  bgcolor="#F2F2F2">
@@ -58,31 +57,24 @@ include '../dbConfig.php';
 				<tr>
 					<td>
 						<table width="390" border="0" cellspacing="0" cellpadding="0">
+              <?
+              // 업로드 파일 갯수 지정($num) : 여기서는 3개로 지정함
+              for ($num = 1 ; $num <= 3 ; $num++) {
+                      $hiddenfile = "imagename".$num;
+                      $selectfile = "image".$num;
+                      $checkno = "checkno".$num; // input 태그의 name 속성 값을 inputname1, inputname2, inputname3으로 설정하기 위함
+              ?>
 							<tr>
 								<td>
-									<input type='hidden' name='imagename1' value='<?= $img1?>'>
-									&nbsp;<input type="checkbox" name="checkno1" value="1"> <b>이미지1</b>: s001_1.jpg
+                  <input type='hidden' name='<?$hiddenfile?>' value='s001_1.jpg'>
+										&nbsp;<input type="checkbox" name="<?$checkno?>" value="1"> <b><?php echo $selectfile ?></b>
 									<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="file" name="image1" size="20" value="찾아보기">
+									<input type="file" name="<?$selectfile?>" size="20">
 								</td>
 							</tr>
-							<tr>
-								<td>
-									<input type='hidden' name='imagename2' value='<?= $img2?>'>
-									&nbsp;<input type="checkbox" name="checkno2" value="1"checked> <b>이미지2</b>: s001_2.jpg
-									<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="file" name="image2" size="20" value="찾아보기">
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<input type='hidden' name='imagename3' value='<?= $img3?>'>
-									&nbsp;<input type="checkbox" name="checkno3" value="1"> <b>이미지3</b>:
-									<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="file" name="image3" size="20" value="찾아보기">
-								</td>
-							</tr>
-							<tr>
+              <?php
+          };
+               ?>
 								<td><br>&nbsp;&nbsp;&nbsp;※ 삭제할 그림은 체크를 하세요.</td>
 							</tr>
 				  	</table>
@@ -90,15 +82,15 @@ include '../dbConfig.php';
 						<table width="390" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td  valign="middle">&nbsp;
-									<img src="<?= $img1?>" width="50" height="50" border="1" style='cursor:hand' onclick="imageView('<?= $img1?>')">&nbsp;
-									<img src="<?= $img2?>" width="50" height="50" border="1" style='cursor:hand' onclick="imageView('<?= $img2?>')">&nbsp;
-									<img src="<?= $img3?>"  width="50" height="50" border="1" style='cursor:hand' onclick="imageView('<?= $img3?>')">&nbsp;
+									<img src="<?$selectfile.value?>" width="50" height="50" border="1" style='cursor:hand' onclick="imageView('')">&nbsp;
+									<img src="" width="50" height="50" border="1" style='cursor:hand' onclick="imageView('')">&nbsp;
+									<img src=""  width="50" height="50" border="1" style='cursor:hand' onclick="imageView('')">&nbsp;
 								</td>
 							</tr>
 						</table>
 					</td>
 					<td>
-						<td align="right" width="310"><img name="big" src="../product/s001_1.jpg" width="300" height="300" border="1"></td>
+						<td align="right" width="310"><img name="big" src="" width="300" height="300" border="1"></td>
 					</td>
 				</tr>
 			</table>
@@ -106,6 +98,7 @@ include '../dbConfig.php';
 		</td>
 	</tr>
 </table>
+
 
 <table width="800" border="0" cellspacing="0" cellpadding="5">
 	<tr>
