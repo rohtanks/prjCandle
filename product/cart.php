@@ -20,18 +20,18 @@ $row = mysqli_fetch_array( $result );
 			function cart_edit(kind,pos) {
 				if (kind=="deleteall")
 				{
-					location.href = "cart_edit.html?kind=deleteall";
+					location.href = "cart_edit.php?kind=deleteall";
 				}
 				else if (kind=="delete")	{
-					location.href = "cart_edit.html?kind=delete&pos="+pos;
+					location.href = "cart_edit.php?kind=delete&pos="+pos;
 				}
 				else if (kind=="insert")	{
 					var num=eval("form2.num"+pos).value;
-					location.href = "cart_edit.html?kind=insert&pos="+pos+"&num="+num;
+					location.href = "cart_edit.php?kind=insert&pos="+pos+"&num="+num;
 				}
 				else if (kind=="update")	{
 					var num=eval("form2.num"+pos).value;
-					location.href = "cart_edit.html?kind=update&pos="+pos+"&num="+num;
+					location.href = "cart_edit.php?kind=update&pos="+pos+"&num="+num;
 				}
 			}
 
