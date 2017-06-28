@@ -41,7 +41,7 @@ $row = mysqli_fetch_array( $result );
 					form2.submit();
 				}
 				else {
-					form2.action = "cart.php";
+					form2.action = "cart_edit.php";
 					form2.submit();
 				}
 			}
