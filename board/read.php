@@ -10,7 +10,15 @@ $id = $_GET ['id'];
 if (!isset($_GET['page'])) {
 	$page = 1;
 } else {
-    $page = $_GET ['page'];
+	$page = $_GET ['page'];
+}
+if (isset($_GET['search_type'])) {
+	$search_type = $_GET['search_type']; // 게시판 검색 셀렉트 박스 항목
+	$subString .= "&amp;search_type=".$search_type; // 페이지에 붙여넣을 변수, &amp; 는 &(엠퍼샌드)
+}
+if (isset($_GET['search_text'])) {
+	$search_text = $_GET['search_text']; // 게시판 검색어
+	$subString .= "&amp;search_text=".$search_text;
 }
 
 $sql_select_one = "SELECT * FROM board WHERE brd_id = '" . $id . "'";
@@ -63,20 +71,20 @@ mysqli_query($conn, $sql_update_check);
 		<!-- 로그인 전 -->
 			<a href='<?=$domainName?>prjCandle/view/login.php'>로그인</a>
 		<?php
+		} else {
+		?>
+			<a href="<?=$domainName?>prjcandle/view/write.php?mode=write">글쓰기</a>
+		<?php 
 		}
 		?>
-		<a href="<?=$domainName?>prjcandle/view/list.php?page=<?= $page ?>">목록보기</a>
-		<a href="<?=$domainName?>prjcandle/view/write.php?mode=write">글쓰기</a>
+		<a href="<?=$domainName?>prjcandle/view/list.php?page=<?= $page ?><?=$subString?>">목록보기</a>
 	</div>
 	<hr>
-<!-- 	댓글 쓰기 시작(로그인 해서만 가능) -->
+<!-- 	댓글 표시 부분 시작 -->
 	<?php 
-	if ($login_user) {
-		include_once './comment.php';
-	}
+	include_once './comment.php';
 	?>
-<!-- 	댓글 쓰기 끝 -->
-	
+<!-- 	댓글 표시 부분 끝 -->
 <!-- 	이전글 다음글 보기 -->
 	<?php
 	// 이전글 보기 버튼
@@ -88,7 +96,7 @@ mysqli_query($conn, $sql_update_check);
 	$prev_id = mysqli_fetch_row($result_prev);
 	if ($prev_id[0]) //이전 글이 있을 경우
 	{
-		echo "<a href='$domainName"."prjcandle/board/read.php?page=$page&id=$prev_id[0]'>▽이전글</a>&nbsp;&nbsp;";
+		echo "<a href='$domainName"."prjcandle/board/read.php?page=$page&id=$prev_id[0].$subString'>▽이전글</a>&nbsp;&nbsp;";
 	}
 
 	// 다음글 보기 버튼
@@ -97,158 +105,10 @@ mysqli_query($conn, $sql_update_check);
 	$next_id = mysqli_fetch_row($result_next);
 	if ($next_id[0]) //다음 글이 있을 경우
 	{
-		echo "<a href='$domainName"."prjcandle/board/read.php?page=$page&id=$next_id[0]'>△다음글</a>";
+		echo "<a href='$domainName"."prjcandle/board/read.php?page=$page&id=$next_id[0].$subString'>△다음글</a>";
 	}
 	?>
 </div>
-<script>
-var _user = '0';
-
-function trimSpace (str) {
-    return str ? str.replace(/^[\s\ufeff\u200b\xa0\u3000]+|[\s\ufeff\u200b\xa0\u3000]+$/g, '') : '';
-}
-
-//WEB-2044 코멘트 입력
-var commentInit = 1;
-function CommentInitform(memoForm){
-	if(!checkLogin())
-		return;
-
-	if(commentInit == 1){
-		commentInit = -1;
-		memoForm.value = "";
-	}
-}
-
-var checkLoginCount = 0;
-function checkLogin()
-{
-	if(checkLoginCount > 0)
-		return true;
-
-	if(_user == '0') {
-		checkLoginCount++;
-		alert('로그인 이후에 이용 가능 합니다.');
-		var s_url = 'zboard%2Fview.php%3Fid%3Dfreeboard%26page%3D2%26divpage%3D997%26no%3D5343473';
-		location.href=G_HOME_SSL_URL +"/zboard/login.php?s_url=" + s_url;
-		return false;
-	}
-
-	return true;
-}
-
-$(document).ready(function() {
-    var imageResizeWidth = 550;
-
-    if(typeof FileReader == "undefined") {
-       $("label[id='upload-button']").hide();
-       $("tr[id='comment-upload-preview']").hide();
-    }
-
-    $("label[id='upload-button']").live('click', function(e) {
-
-    	if(!checkLogin())
-        	return false;
-
-	    if(typeof FileReader == "undefined") {
-            alert('IE9 이하버전은 지원하지 않습니다.');
-            return false;
-	    } else {
-            $("input[id='image-upload']").trigger('click');
-            e.preventDefault();
-	    }
-    });
-
-    $('#image-upload').live('change', function(e) {
-        if(typeof FileReader == "undefined") return true;
-
-        var elem = $(this);
-	    var files = e.target.files;
-
-	    if (files.length > 0) $('.upload-path').html(files[0].name);
-
-	    for (var i = 0, f; f = files[i]; i++) {
-	        if (f.type.match('image.*')) {
-                if (f.size > 10 * 1024 * 1024) {
-                    alert('원본 이미지 용량은 10MB를 넘을 수 없습니다.');
-                    return false;
-                }
-
-	            var reader = new FileReader();
-
-	            reader.onload = function(readerEvent) {
-	                var origImage = new Image();
-
-	                origImage.onload = function(imageEvent) {
-        	            var canvas = document.createElement("canvas");
-        	            var width = origImage.width;
-        	            var height = origImage.height;
-
-        	            var xhr = new XMLHttpRequest();
-        	            xhr.open('POST', '/zboard/comment_file_upload.php', true);
-
-        	            var data = new FormData();
-                        data.append('origname', readerEvent.target.filename);
-
-        	            if (origImage.width > imageResizeWidth) {
-        	                width = imageResizeWidth;
-        	                height = (imageResizeWidth / origImage.width) * origImage.height;
-
-        	                canvas.width = width;
-        	                canvas.height = height;
-        	                canvas.getContext("2d").drawImage(origImage, 0, 0, width, height);
-
-        	                var bitmapData = canvas.toDataURL(readerEvent.target.filetype);
-        	                data.append('filehtml5', bitmapData.replace(/^(.*)base64,/, ''));
-        	            } else {
-        	                data.append('file', readerEvent.target.file);
-        	            }
-
-        	            xhr.onreadystatechange = function(xhrEvent) {
-        	                if (this.readyState === 4 && this.status === 200) {
-        	                    var jsonText = decodeURI(trimSpace(this.responseText));
-        	                    jsonText = jsonText.replace(/\+/g, ' ').replace(/\\/g, '\\\\');
-        	                    var jsonData = JSON.parse(jsonText);
-
-        	                    $('.upload-path').css('display', 'inline-block');
-
-                                $("input[id='comment_uploaded_file']").val(jsonData.fileName);
-
-        	                    previewDiv = $('.file-preview');
-        	                    bg_width = previewDiv.width() * 2;
-        	                    previewDiv.show();
-        	                    previewDiv.css({
-        	                        "background-size":bg_width + "px, auto",
-        	                        "background-position":"50%, 50%",
-        	                        "background-image":"url("+jsonData.fileUrl+")"
-        	                    });
-        	                }
-        	            };
-
-        	            xhr.send(data);
-	                };
-
-	                origImage.src = readerEvent.target.result;
-	            };
-
-	            reader.file = f;
-                reader.filename = f.name;
-                reader.filetype = f.type;
-                reader.readAsDataURL(f);
-	        } else {
-                alert('gif, png, jpg 사진 파일만 올릴 수 있습니다.');
-	        }
-	    }
-    });
-
-    $('.file-preview .btn-remove').live('click', function() {
-	    $("input[id='image-upload']").val('');
-	    $("input[id='comment_uploaded_file']").val('');
-        $('.file-preview').css('background-image', 'none').hide();
-        $('.upload-path').hide();
-    });
-});
-</script>
 <?php
 include '../footer.php';
 ?>
