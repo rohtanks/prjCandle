@@ -44,7 +44,7 @@ include 'config.php';
 	<table width="959" border="0" cellspacing="0" cellpadding="0"
 		align="center" style="width: 170px; margin-left: 1200px;">
 		<tr>
-			<td align="right" valign="bottom" bgcolor="#fff">
+			<td align="center" valign="bottom" bgcolor="#fff">
 				<table border="0" cellspacing="0" cellpadding="0">
 					<tr>
 						<td><a href="<?=$domainName?>prjCandle/view/index.php">HOME</a></td>
@@ -62,16 +62,14 @@ include 'config.php';
 	?>
  <!-- 로그인 후 -->
 	<table width="959" border="0" cellspacing="0" cellpadding="0"
-		align="center" style="width: 180px; margin-left: 1085px;">
+		align="center" style="width: 120px; margin-left: 1200px;">
 		<tr>
-			<td align="right" valign="bottom" bgcolor="#fff">
+			<td align="center" valign="bottom" bgcolor="#fff">
 				<table border="0" cellspacing="0" cellpadding="0">
 					<tr>
 						<td><a href="<?=$domainName?>prjCandle/view/index.php">HOME</a></td>
 						<td><img src="../img/menu_line.gif" width="11"></td>
 						<td><a href="<?=$domainName?>prjCandle/member/logout.php">로그아웃</a></td>
-						<td><img src="../img/menu_line.gif" width="11"></td>
-						<td><a href="<?=$domainName?>prjCandle/view/register.php">회원가입</a></td>
 					</tr>
 				</table>
 			</td>

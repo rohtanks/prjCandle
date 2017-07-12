@@ -74,7 +74,7 @@ mysqli_query($conn, $sql_update_commentNum);
 		<tr>
 			<td><?= $row['brd_id']?></td>
 			<td><?= $row['brd_writer']?></td>
-			<td><a href="../board/read.php?page=<?= $page ?>&id=<?= $row['brd_id']?>"><?= $row['brd_title']?>
+			<td><a href="../board/read.php?page=<?= $page ?>&id=<?= $row['brd_id']?><?=$subString?>"><?= $row['brd_title']?>
 			<?php if (($row['brd_commentNum']) > 0) {?>
 			[<?=$row['brd_commentNum']?>]<?php }?></a></td>
 			<td><?= $row['brd_created_datetime']?></td>
@@ -116,32 +116,32 @@ mysqli_query($conn, $sql_update_commentNum);
 	}
 	?>
 	<!-- 게시판 검색창 -->
-	<table>
-		<tbody class="searchBox">
-			<form action="./list.php" method="get">
-				<tr>
-					<td>
-						<span>
-				  		<select name="search_type">
-				  			<option value="title_content" <?= ($search_type=='title_content') ? "selected='selected'" : null ?>>제목+본문</option> <!-- 페이지 변경시 셀렉트 박스를 유지하기 위해 -->
-				  			<option value="brd_title" <?= ($search_type=='brd_title') ? "selected='selected'" : null ?>>제목</option>
-				  			<option value="brd_writer" <?= ($search_type=='brd_writer') ? "selected='selected'" : null ?>>작성자</option>
-				  			<option value="co_content" <?= ($search_type=='co_content') ? "selected='selected'" : null ?>>댓글내용</option>
-				  			<option value="co_writer" <?= ($search_type=='co_writer') ? "selected='selected'" : null ?>>댓글작성자</option>
-				  		</select>
-						</span>
-					</td>
-				  	<td class="searchInput">
-				  		<span>
-				  			<!-- 페이지 변경시 검색창에 검색어를 유지하기 위해 -->
-				    		<input type="text" name="search_text" maxlength="40" size="18" value="<?= (isset($search_text)) ? $search_text : null ?>" />
-							<a href="#" style="padding-left: 10px"><img src="../img/i_search1.gif" border="0"></a> <!-- TODO 검색버튼 기능 구현해야함 -->
-				  		</span>
-				  	</td>
-				</tr>
-			</form>
-		</tbody>
-	</table>
+	<form action="./list.php" method="get">
+		<table>
+			<tbody class="searchBox">
+					<tr>
+						<td>
+							<span>
+					  		<select name="search_type">
+					  			<option value="title_content" <?= ($search_type=='title_content') ? "selected='selected'" : null ?>>제목+본문</option> <!-- 페이지 변경시 셀렉트 박스를 유지하기 위해 -->
+					  			<option value="brd_title" <?= ($search_type=='brd_title') ? "selected='selected'" : null ?>>제목</option>
+					  			<option value="brd_writer" <?= ($search_type=='brd_writer') ? "selected='selected'" : null ?>>작성자</option>
+					  			<option value="co_content" <?= ($search_type=='co_content') ? "selected='selected'" : null ?>>댓글내용</option>
+					  			<option value="co_writer" <?= ($search_type=='co_writer') ? "selected='selected'" : null ?>>댓글작성자</option>
+					  		</select>
+							</span>
+						</td>
+					  	<td class="searchInput">
+					  		<span>
+					  			<!-- 페이지 변경시 검색창에 검색어를 유지하기 위해 -->
+					    		<input type="text" name="search_text" maxlength="40" size="18" value="<?= (isset($search_text)) ? $search_text : null ?>" />
+								<a href="#" style="padding-left: 10px"><img src="../img/i_search1.gif" border="0"></a> <!-- TODO 검색버튼 기능 구현해야함 -->
+					  		</span>
+					  	</td>
+					</tr>
+			</tbody>
+		</table>
+	</form>
 </div>
 
 <?php
