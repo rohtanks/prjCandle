@@ -14,6 +14,7 @@ $sql_create_board = "CREATE TABLE `board` (
    `brd_updated_datetime` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
    `brd_like` INT(11) UNSIGNED NOT NULL DEFAULT 0,
    `brd_check` INT(11) UNSIGNED NOT NULL DEFAULT 0,
+   `brd_commentNum` INT(11) UNSIGNED DEFAULT 0,
    PRIMARY KEY (`brd_id`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8";
 
@@ -21,7 +22,7 @@ $sql_create_board = "CREATE TABLE `board` (
 // $sql_alter_board = "ALTER TABLE board DROP COLUMN 필드명";
 
 // 필드 추가 시
-// $sql_alter_board = "ALTER TABLE board ADD 필드명 타입()";
+// $sql_alter_board = "ALTER TABLE board ADD `brd_commentNum` INT(11) UNSIGNED DEFAULT 0";
 
 // 필드명 타입 변경 시
 // $sql = "ALTER TABLE board CHANGE 필드명 변환필드명 타입()";
