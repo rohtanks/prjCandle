@@ -3,61 +3,74 @@ include_once '../dbConfig.php'; // require는 해당 파일의 코드를 현재 
 
 session_start ();
 
-// mode 프로퍼티를 통해 글 쓰기인지 수정하기인지 알아본다
-$mode = $_GET['mode'];
-
-$brd_cate = $_POST ['brd_cate'];
-$brd_writer = $_SESSION ['login_user'];
-$brd_title = $_POST ['brd_title'];
-$brd_content = $_POST ['brd_content'];
-if (empty ( $_POST ['brd_photo'] )) {
-	$brd_photo = null;
-} else {
-	$brd_photo = $_POST ['brd_photo'];
+// 원 게시글 번호
+$brd_id = $_POST['brd_id'];
+if (isset($_SESSION['login_user'])) {
+	$co_writer = $_SESSION['login_user'];
 }
-if (empty ( $_POST ['brd_secret'])) {
-	$brd_secret = "0";
-} else {
-	$brd_secret = $_POST ['brd_secret'];
+$co_content = (isset($_POST ['co_content'])) ? $_POST ['co_content'] : null;
+
+$w = '';
+$coId = 'null';
+
+// 2Depth & 수정 & 삭제
+if(isset($_POST['w'])) {
+	$w = $_POST['w'];
+	$coId = $_POST['co_id'];
 }
 
-// 글 쓰기
-if ($mode == 'write') {
-	$sql_insert_board = "INSERT INTO board (brd_cate, brd_writer, brd_title, brd_content,
-	brd_photo, brd_secret) VALUES ('" . $brd_cate ."', '" . $brd_writer . "', '" . $brd_title . "',
-	'" . $brd_content . "', NULL, '" . $brd_secret . "')";
-	
-	echo $sql_insert_board;
-	
-	if (mysqli_query($conn, $sql_insert_board)) {
-		// 작성한 글의 뷰 페이지로 리다이렉션 하는 효과를 주기 위한 방법
-		// 작성한 글의 brd_id를 구하기 위한 임시 방편
-		$sql_select_id = "SELECT brd_id FROM board WHERE brd_writer = '".$brd_writer."' ORDER BY brd_id DESC";
+if($w !== 'd') { // $w 변수가 d일 경우 $coContent와 $coWriter가 필요 없음.
+	$co_content = $_POST['co_content'];
+	// 	if($w !== 'u') { // $w 변수가 u일 경우 $coId가 필요 없음.
+	// 		$coId = $_POST['coId'];
+	// 	}
+}
+
+if(empty($w) || $w === 'w') { // $w 변수가 비어있거나 w인 경우
+	$msg = '작성';
+	$sql = "INSERT INTO comment (brd_id, co_order, co_writer, co_content) VALUES (".$brd_id.", ".$coId.", '".$co_writer."', '".$co_content."')";
+	if(empty($w)) { // $w 변수가 비어있다면(1Depth 글 쓰기)
+		$result = mysqli_query($conn, $sql);
 		
-		$result_get_id = mysqli_query($conn, $sql_select_id);
-		$row = mysqli_fetch_row($result_get_id);
-		$read_id = $row[0];
-		header("Location: read.php?id=".$read_id);
-	} else {
-		exit(mysqli_error($conn));
+		$co_id = mysqli_insert_id($conn); // 댓글의 깊이를 주기 위해 id가 필요하다
+		# The mysqli_insert_id() function returns the id (generated with AUTO_INCREMENT) used in the last query.
+		$sql = "UPDATE comment SET co_order = co_id WHERE co_id = ".$co_id;
 	}
 	
-	// 수정하기
-} else if ($mode == 'modify') {
-	$id = (int)$_GET['id'];
-	$sql_update_board = "UPDATE board SET brd_cate = '".$brd_cate."', brd_title = '".$brd_title."', brd_content = '".$brd_content."',
-	brd_photo = NULL, brd_secret = '".$brd_secret."' WHERE brd_id = $id";
-	if (mysqli_query($conn, $sql_update_board)) {
-		echo "<meta http-equiv='refresh' content='1; URL=read.php?id=$id'>";
-		#meta 태그 http-equiv의 값을 refresh로 주면 content에 지정해 놓은 초 마다 refresh를 함
-		#홈페이지의 주소가 바뀌었을 경우에 사용하는 태그로 1초뒤에 url 속성값으로 지정한 페이지로 이동한다는 의미입니다.
-		#이렇게 이동하는 것은 하이퍼링크를 눌러서 이동하는거와는 다른 의미를 갖습니다.
-		#하이퍼링크를 누른다는것은 한 페이지를 읽고 있다가 다른 페이지로 이동한다는 의미이지만, <meta> 태그를 이용한 페이지 이동은 http-equiv 속성값을 지정된거와 같이 refresh 한다는 의미입니다.
-		#즉 위와 같은 <meta>태그가 입력된 페이지는 읽지 않은걸로 인식하겠다는 의미입니다.
-	} else {
-		exit(mysqli_error($conn));
-	}
+} else if($w === 'm') { // 수정
+	$msg = '수정';
+	$sql = "UPDATE comment SET co_content = '".$co_content."' WHERE co_id = ".$coId;
+	
+} else if($w === 'd') { // 삭제
+	$msg = '삭제';
+	$sql = "DELETE FROM comment WHERE co_id = ".$coId; // TODO 댓글 삭제시 대댓글은 남기는 문제 고려해봐야함
+	
+} else {
+	?>
+	<script>
+		alert('정상적인 경로를 이용해주세요.');
+		history.back();
+	</script>
+<?php 
+	exit(mysqli_error($conn));
 }
-
+	
+$result = mysqli_query($conn, $sql);
+if($result) {
+?>
+	<script>
+		alert('댓글이 정상적으로 <?=$msg?>되었습니다.');
+	</script>
+<?php
+	echo "<meta http-equiv='refresh' content='1; URL=./read.php?id=$brd_id'>";
+} else {
+?>
+	<script>
+		alert('댓글 <?=$msg?>에 실패했습니다.');
+		history.back();
+	</script>
+<?php
+	exit(mysqli_error($conn));
+}
 mysqli_close($conn);
 ?>
