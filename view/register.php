@@ -227,7 +227,7 @@ body .layerbox#register_auth div.wrapper div.body dl.form1 dd span {
 					nameCheckMsg.html('이름을 입력해 주세요.');
 					$(this).attr('class','info_error'); // 함수에 들어가면 안먹힘
 					nameFlag = 0;
-					return false;
+					return false; // true를 리턴하면 이벤트가 원래 작동하는 방식대로 작동을 하고, false를 리턴하면 이벤트는 실행하게 되지만 그 이후에 작동하는 이벤트의 원래 기능(default behavior)이 작동하지 않음
 				} else if (!pattern_valName.test($(this).val())) {
 					nameCheckMsg.html('사용할 수 없는 문자가 있어요. 한글(성과 이름을 공백없이 입력) 또는 영문만 입력해 주세요.');
 					$(this).attr('class','info_error');
