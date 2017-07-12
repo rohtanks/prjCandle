@@ -12,6 +12,14 @@ if (!isset($_GET['page'])) {
 } else {
     $page = $_GET ['page'];
 }
+if (isset($_GET['search_type'])) {
+	$search_type = $_GET['search_type']; // 게시판 검색 셀렉트 박스 항목
+	$subString .= "&amp;search_type=".$search_type; // 페이지에 붙여넣을 변수, &amp; 는 &(엠퍼샌드)
+}
+if (isset($_GET['search_text'])) {
+	$search_text = $_GET['search_text']; // 게시판 검색어
+	$subString .= "&amp;search_text=".$search_text;
+}
 
 $sql_select_one = "SELECT * FROM board WHERE brd_id = '" . $id . "'";
 $result_one = mysqli_query ( $conn, $sql_select_one );
@@ -69,7 +77,7 @@ mysqli_query($conn, $sql_update_check);
 		<?php 
 		}
 		?>
-		<a href="<?=$domainName?>prjcandle/view/list.php?page=<?= $page ?>">목록보기</a>
+		<a href="<?=$domainName?>prjcandle/view/list.php?page=<?= $page ?><?=$subString?>">목록보기</a>
 	</div>
 	<hr>
 <!-- 	댓글 표시 부분 시작 -->
@@ -88,7 +96,7 @@ mysqli_query($conn, $sql_update_check);
 	$prev_id = mysqli_fetch_row($result_prev);
 	if ($prev_id[0]) //이전 글이 있을 경우
 	{
-		echo "<a href='$domainName"."prjcandle/board/read.php?page=$page&id=$prev_id[0]'>▽이전글</a>&nbsp;&nbsp;";
+		echo "<a href='$domainName"."prjcandle/board/read.php?page=$page&id=$prev_id[0].$subString'>▽이전글</a>&nbsp;&nbsp;";
 	}
 
 	// 다음글 보기 버튼
@@ -97,7 +105,7 @@ mysqli_query($conn, $sql_update_check);
 	$next_id = mysqli_fetch_row($result_next);
 	if ($next_id[0]) //다음 글이 있을 경우
 	{
-		echo "<a href='$domainName"."prjcandle/board/read.php?page=$page&id=$next_id[0]'>△다음글</a>";
+		echo "<a href='$domainName"."prjcandle/board/read.php?page=$page&id=$next_id[0].$subString'>△다음글</a>";
 	}
 	?>
 </div>
