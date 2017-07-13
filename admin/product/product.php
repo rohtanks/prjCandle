@@ -67,8 +67,8 @@ if (! $sel1)
 									<td width="100">&nbsp <?=$row['productname']?></td>
 									<td width="280">&nbsp <?=$row['productprice']?></td>
 									<td width="80" align="center"><a
-										href="product_edit.php?no=<?=$row['productno']?>&sel1=<?=$row['productname']?>&text1=<?=$row['productprice']?>&img1=<?=$row['productimage1']?>&img2=<?=$row['productimage2']?>&img3=<?=$row['productimage3']?>">수정</a>/
-									<a href="product_delete.php?no=<?=$row['productno']?>"
+										href="<?=$domainName?>prjCandle/admin/product/product_edit.php?no=<?=$row['productno']?>&sel1=<?=$row['productname']?>&text1=<?=$row['productprice']?>&img1=<?=$row['productimage1']?>&img2=<?=$row['productimage2']?>&img3=<?=$row['productimage3']?>">수정</a>/
+									<a href="<?=$domainName?>prjCandle/admin/product/product_delete.php?no=<?=$row['productno']?>"
 									onclick="javascript:return confirm('삭제할까요 ?');">삭제</a></td>
 							<?php
 							}
