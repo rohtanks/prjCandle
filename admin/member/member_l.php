@@ -11,9 +11,9 @@ if (isset ( $_SESSION ['super_level'] )) {
 	$level = $_SESSION ['super_level'];
 }
 if (! $superUser && ! $level) {
-	header ( 'Location: ../view/login.php' );
+	header ( 'Location: '.$domainName.'prjCandle/admin/view/login.php' );
 } elseif ($level > 2) {
-	header ( 'Location: ../view/admin.php' );
+	header ( 'Location: '.$domainName.'prjCandle/admin/view/admin.php' );
 }
 include "../../lib/class.common.php";
 include "../../lib/class.admin.php";
@@ -143,10 +143,11 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || isse
 									</tr>
 									<tr>
 										<th>가입일/기념일</th>
-										<td colspan="3"><select name="date_type" class="dateType">
+										<td colspan="3">
+											<select name="date_type" class="dateType">
 												<option selected="selected" value="">- 선택 -</option>
 												<option value="1">가입일</option>
-										</select>
+											</select>
 											<div style="float: left;">
 												<span class="gLabel" style="margin-left: 5px; float: left;">
 													<div id="reg_form" class="invisible">
@@ -156,7 +157,8 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || isse
 															id="regist_end_date" style="width: 75px;" type="text">
 													</div>
 												</span>
-											</div></td>
+											</div>
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -212,7 +214,7 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || isse
 					</form>
 					<div class="panel-body">
 						<form name="list_form" id="lform"
-							action="/prjCandle/admin/member/member_v.php" method="post">
+							action="<?=$domainName?>prjCandle/admin/member/member_v.php" method="post">
 							<input type="hidden" name="page" value="<?=$page?>" />
 							<?php 
 							$common->addHiddenField('mem_id', $_POST);
