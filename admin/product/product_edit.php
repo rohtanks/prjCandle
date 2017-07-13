@@ -57,7 +57,7 @@ include '../dbConfig.php';
 				<tr>
 					<td>
 						<table width="390" border="0" cellspacing="0" cellpadding="0">
-              <?
+              <?php
               // 업로드 파일 갯수 지정($num) : 여기서는 3개로 지정함
               for ($num = 1 ; $num <= 3 ; $num++) {
                       $hiddenfile = "imagename".$num;
@@ -66,15 +66,16 @@ include '../dbConfig.php';
               ?>
 							<tr>
 								<td>
-                  <input type='hidden' name='<?$hiddenfile?>' value='s001_1.jpg'>
-										&nbsp;<input type="checkbox" name="<?$checkno?>" value="1"> <b><?php echo $selectfile ?></b>
+                  					<input type='hidden' name='<?$hiddenfile?>' value='s001_1.jpg'>
+									&nbsp;<input type="checkbox" name="<?$checkno?>" value="1"> <b><?php echo $selectfile ?></b>
 									<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<input type="file" name="<?$selectfile?>" size="20">
 								</td>
 							</tr>
               <?php
-          };
-               ?>
+          	  }
+              ?>
+							<tr>	
 								<td><br>&nbsp;&nbsp;&nbsp;※ 삭제할 그림은 체크를 하세요.</td>
 							</tr>
 				  	</table>
