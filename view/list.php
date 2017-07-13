@@ -2,7 +2,6 @@
 if(!isset($_SESSION)){
 	session_start();
 }
-include '../config.php';
 include '../dbConfig.php';
 include '../common.php';
 
@@ -57,93 +56,131 @@ $result = mysqli_query ( $conn, $sql_select_list );
 $sql_update_commentNum = "UPDATE board AS b SET brd_commentNum = (SELECT COUNT(*) FROM comment AS c WHERE c.brd_id = b.brd_id)";
 mysqli_query($conn, $sql_update_commentNum);
 ?>
-<div class="box" style="padding-left: 600px;">
-	<!-- 게시물 리스트 -->
-	<table>
-		<tr>
-			<td>번호</td>
-			<td>글쓴이</td>
-			<td>제목</td>
-			<td>등록일</td>
-			<td>추천</td>
-			<td>조회</td>
-		</tr>
-		<?php
-		while ( $row = mysqli_fetch_assoc ( $result ) ) {
-		?>
-		<tr>
-			<td><?= $row['brd_id']?></td>
-			<td><?= $row['brd_writer']?></td>
-			<td><a href="../board/read.php?page=<?= $page ?>&id=<?= $row['brd_id']?><?=$subString?>"><?= $row['brd_title']?>
-			<?php if (($row['brd_commentNum']) > 0) {?>
-			[<?=$row['brd_commentNum']?>]<?php }?></a></td>
-			<td><?= $row['brd_created_datetime']?></td>
-			<td><?= $row['brd_like']?></td>
-			<td><?= $row['brd_check']?></td>
-		</tr>
-		<?php
-		}
-
-		mysqli_close($conn);
-		?>
-	</table>
-	<!-- 페이지 리스트 -->
-	<table>
-		<tr>
-			<td>
-			<?php
-			if ($total_row < 1) {
-				echo "게시물이 없습니다.";
-			} else {
-				include '../board/pagingWithSearching.php';
-			}
-			?>
-			</td>
-		</tr>
-	</table>
-	<?php
-	if (! isset ( $_SESSION ['login_user'] )) {
-	?>
-	<!-- 로그인 전 -->
-		<a href="<?=$domainName?>prjCandle/view/login.php">로그인</a>
-	<?php
-	} else {
-	?>
-	<!-- 로그인 후 -->
-		<a href="<?=$domainName?>prjcandle/view/write.php?mode=write">글쓰기</a>
-	    <a href="<?=$domainName?>prjcandle/member/logout.php">로그아웃</a>
-	<?php
-	}
-	?>
-	<!-- 게시판 검색창 -->
-	<form action="./list.php" method="get">
-		<table>
-			<tbody class="searchBox">
-					<tr>
-						<td>
-							<span>
-					  		<select name="search_type">
-					  			<option value="title_content" <?= ($search_type=='title_content') ? "selected='selected'" : null ?>>제목+본문</option> <!-- 페이지 변경시 셀렉트 박스를 유지하기 위해 -->
-					  			<option value="brd_title" <?= ($search_type=='brd_title') ? "selected='selected'" : null ?>>제목</option>
-					  			<option value="brd_writer" <?= ($search_type=='brd_writer') ? "selected='selected'" : null ?>>작성자</option>
-					  			<option value="co_content" <?= ($search_type=='co_content') ? "selected='selected'" : null ?>>댓글내용</option>
-					  			<option value="co_writer" <?= ($search_type=='co_writer') ? "selected='selected'" : null ?>>댓글작성자</option>
-					  		</select>
-							</span>
-						</td>
-					  	<td class="searchInput">
-					  		<span>
-					  			<!-- 페이지 변경시 검색창에 검색어를 유지하기 위해 -->
-					    		<input type="text" name="search_text" maxlength="40" size="18" value="<?= (isset($search_text)) ? $search_text : null ?>" />
-								<a href="#" style="padding-left: 10px"><img src="../img/i_search1.gif" border="0"></a> <!-- TODO 검색버튼 기능 구현해야함 -->
-					  		</span>
-					  	</td>
-					</tr>
-			</tbody>
-		</table>
-	</form>
-</div>
-
+	<div class="container">
+		<div class="row">
+            <div class="box">
+                <div align="center" class="col-lg-12">
+                	<hr>
+                    <h2 class="intro-text text-center">
+                        <strong>게시판</strong>
+                    </h2>
+                    <hr>
+                	<div class="panel panel-default">
+                		<div class="panel-body">
+                			<div class="table-responsive table-bordered">
+			                	<!-- 게시물 리스트 -->
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>글쓴이</th>
+											<th>제목</th>
+											<th>등록일</th>
+											<th>추천</th>
+											<th>조회</th>
+										</tr>
+									</thead>
+									<tbody>
+									<?php
+									while ( $row = mysqli_fetch_assoc ( $result ) ) {
+									?>
+										<tr>
+											<td><?= $row['brd_id']?></td>
+											<td><?= $row['brd_writer']?></td>
+											<td><a href="../board/read.php?page=<?= $page ?>&id=<?= $row['brd_id']?><?=$subString?>"><?= $row['brd_title']?>
+											<?php if (($row['brd_commentNum']) > 0) {?>
+											[<?=$row['brd_commentNum']?>]<?php }?></a></td>
+											<td><?= $row['brd_created_datetime']?></td>
+											<td><?= $row['brd_like']?></td>
+											<td><?= $row['brd_check']?></td>
+										</tr>
+									<?php
+									}
+									mysqli_close($conn);
+									?>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.table-responsive table-bordered -->
+							<!-- 페이지 리스트 -->
+							<table class="pagination">
+								<tr>
+									<td>
+									<?php
+									if ($total_row < 1) {
+										echo "게시물이 없습니다.";
+									} else {
+										include '../board/pagingWithSearching.php';
+									}
+									?>
+									</td>
+								</tr>
+							</table>
+							<?php
+							if (! isset ( $_SESSION ['login_user'] )) {
+							?>
+							<table>
+								<tr>	
+								<!-- 로그인 전 -->
+									<td>
+										<a href="<?=$domainName?>prjCandle/view/login.php">로그인</a>
+									</td>
+							<?php
+							} else {
+							?>
+								<!-- 로그인 후 -->
+									<td>
+										<a href="<?=$domainName?>prjcandle/view/write.php?mode=write">글쓰기</a>
+									</td>
+									<td>
+								    	<a href="<?=$domainName?>prjcandle/member/logout.php">로그아웃</a>
+								    </td>
+								</tr>
+							</table>
+							<?php
+							}
+							?>
+							<!-- 게시판 검색창 -->
+							<div>
+								<form action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="get">
+									<table class="intro-text">
+										<tbody class="searchBox">
+											<tr>
+												<td>
+													<span>
+											  		<select name="search_type">
+											  			<option value="title_content" <?= ($search_type=='title_content') ? "selected='selected'" : null ?>>제목+본문</option> <!-- 페이지 변경시 셀렉트 박스를 유지하기 위해 -->
+											  			<option value="brd_title" <?= ($search_type=='brd_title') ? "selected='selected'" : null ?>>제목</option>
+											  			<option value="brd_writer" <?= ($search_type=='brd_writer') ? "selected='selected'" : null ?>>작성자</option>
+											  			<option value="co_content" <?= ($search_type=='co_content') ? "selected='selected'" : null ?>>댓글내용</option>
+											  			<option value="co_writer" <?= ($search_type=='co_writer') ? "selected='selected'" : null ?>>댓글작성자</option>
+											  		</select>
+													</span>
+												</td>
+											  	<td class="searchInput">
+											  		<span>
+											  			<!-- 페이지 변경시 검색창에 검색어를 유지하기 위해 -->
+											    		<input type="text" name="search_text" maxlength="40" size="18" value="<?= (isset($search_text)) ? $search_text : null ?>" />
+														<a href="#" style="padding-left: 10px"><img src="../img/i_search1.gif" border="0"></a> <!-- TODO 검색버튼 기능 구현해야함 -->
+											  		</span>
+											  	</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+							</div>
+						</div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel panel-default -->
+                </div>
+                <!-- /.col-lg-12 -->
+			</div>
+			<!-- /.box -->
+		</div>
+		<!-- /.row -->
+	</div>
+    <!-- /.container -->
 <?php
 include '../footer.php';
 ?>
