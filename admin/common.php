@@ -397,10 +397,10 @@ if (isset($_SESSION['super_level'])) {
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> 계정생성<span class="fa arrow"></span></a> <!-- 관리자 계정 생성은 오로지 레벨 1의 관리자만 가능 -->
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="./register.php">관리자 계정</a>
+                                    <a href="<?=$domainName?>prjCandle/admin/view/register.php">관리자 계정</a>
                                 </li>
                                 <li>
-                                    <a href="/prjCandle/view/register.php">회원 계정</a>
+                                    <a href="<?=$domainName?>prjCandle/view/register.php">회원 계정</a> <!-- 임시 링크 -->
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
