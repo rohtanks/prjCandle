@@ -1,4 +1,5 @@
 <?php
+include '../config.php';
 include '../dbConfig.php';
 
 // id 파라미터의 값이 없을 경우 0으로 인식을 하기 때문에 이런 처리를 했다
@@ -7,7 +8,7 @@ $sql_delete_board = "DELETE FROM board WHERE brd_id = $id";
 
 if (!empty($id)) {
 	if (mysqli_query($conn, $sql_delete_board)) {
-		header("Location: list.php");
+		header("Location: ".$domainName."prjCandle/view/list.php");
 	} else {
 		exit(mysqli_error($conn));
 	}
