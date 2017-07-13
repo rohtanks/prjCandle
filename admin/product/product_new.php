@@ -10,11 +10,6 @@ include '../dbConfig.php';
 
 <center>
 
-<br>
-<script> document.write(menu());</script>
-<br>
-<br>
-
 <table width="800" border="1" cellpadding="2" style="border-collapse:collapse">
 	<tr height="23">
 		<td width="100" bgcolor="#CCCCCC" align="center">상품코드</td>
