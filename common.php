@@ -18,6 +18,9 @@ session_start(); // 여기에 세션을 시작하는 이유는 로그인 페이�
 	<!-- Custom CSS -->
 	<link href="../css/business-casual.css" rel="stylesheet">
 	
+	<!-- Custom Fonts -->
+	<link href="../fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+	
 	<!-- Fonts -->
 	<link
 		href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
