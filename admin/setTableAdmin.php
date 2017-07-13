@@ -1,5 +1,5 @@
 <?php
-include '../dbConfig.php';
+include './dbConfig.php';
 
 // 회원 테이블 생성
 $sql_create_admin = "CREATE TABLE `admin` (
