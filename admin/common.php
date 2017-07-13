@@ -287,18 +287,18 @@ if (isset($_SESSION['super_level'])) {
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
+<!--                         <li class="sidebar-search"> -->
 				            <!-- 검색 바 -->
-				            <div class="input-group custom-search-form"> <!-- TODO 검색 기능 추가 -->
-				                <input type="text" class="form-control" placeholder="Search...">
-				                <span class="input-group-btn">
-				                	<button class="btn btn-default" type="button">
-				                    	<i class="fa fa-search"></i>
-				                	</button>
-				            	</span>
-				            </div>
+<!-- 				            <div class="input-group custom-search-form"> TODO 검색 기능 추가 -->
+<!-- 				                <input type="text" class="form-control" placeholder="Search..."> -->
+<!-- 				                <span class="input-group-btn"> -->
+<!-- 				                	<button class="btn btn-default" type="button"> -->
+<!-- 				                    	<i class="fa fa-search"></i> -->
+<!-- 				                	</button> -->
+<!-- 				            	</span> -->
+<!-- 				            </div> -->
                             <!-- /input-group -->
-                        </li>
+<!--                         </li> -->
 						<!-- 사이드 바 메뉴 구성 -->
                         <?php 
 						if ($level <= 2) {
