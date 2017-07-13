@@ -6,7 +6,7 @@ include '../dbConfig.php';
 
 <body style="margin:0">
 
-<form name="form1" method="post" action="product_insert.php" enctype="multipart/form-data">
+<form name="form1" method="post" action="<?=$domainName?>prjCandle/admin/product/product_insert.php" enctype="multipart/form-data">
 
 <center>
 
