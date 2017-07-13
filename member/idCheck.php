@@ -7,7 +7,7 @@ $sql_select_idCheck = "SELECT COUNT(*) FROM member WHERE mem_nickname = '". $inp
 $result= mysqli_query($conn, $sql_select_idCheck);
 $count = mysqli_fetch_row($result);
 
-if ($count[0] == 1) {
+if ($count[0] >= 1) {
 	echo "NO";
 } else {
 	echo "YES";
