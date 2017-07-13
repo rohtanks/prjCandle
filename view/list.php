@@ -116,10 +116,10 @@ mysqli_query($conn, $sql_update_commentNum);
 									</td>
 								</tr>
 							</table>
+							<table class="table">
 							<?php
 							if (! isset ( $_SESSION ['login_user'] )) {
 							?>
-							<table>
 								<tr>	
 								<!-- 로그인 전 -->
 									<td>
@@ -136,12 +136,12 @@ mysqli_query($conn, $sql_update_commentNum);
 								    	<a href="<?=$domainName?>prjcandle/member/logout.php">로그아웃</a>
 								    </td>
 								</tr>
-							</table>
 							<?php
 							}
 							?>
+							</table>
 							<!-- 게시판 검색창 -->
-							<div class="table-responsive">
+							<div class="col-lg-12">
 								<form role="form" action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="get">
 									<div class="form-group">
 										<select name="search_type" class="form-control">
