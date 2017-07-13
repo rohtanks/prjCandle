@@ -7,7 +7,14 @@
         </div>
     </div>
 </footer>
-
+<script type="text/javascript">
+function go_new() {
+	location.href="product_new.php";
+}
+function imageView(strImage) {
+	this.document.images['big'].src = strImage;
+}
+</script>
 <!-- Bootstrap Core JavaScript -->
 <script src="../js/bootstrap.min.js"></script>
 	
