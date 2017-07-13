@@ -64,7 +64,7 @@ include '../../config.php';
 				<label for="ad_level">권한 등급</label>
 			</dt>
 			<dd>
-				<input type="number" id="ad_level" name="ad_level" min="2" max="3"/> <!-- 1 only admin, 2 관리자 계정 생성만 제한, 3 상품 관리 기능만 -->
+				<input type="number" id="ad_level" name="ad_level" min="2" max="3"/> <!-- 등급 - 1 only admin, 2 관리자 계정 생성과 옵션관리만 제한, 3 게시판 관리 기능만 -->
 			</dd>
 		</dl>
 		<div>
