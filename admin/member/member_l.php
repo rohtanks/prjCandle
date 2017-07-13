@@ -97,7 +97,7 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || isse
 	$search_totalRow = $tmp [0]; // 검색된 전체 회원 수
 	                            
 	// 검색 결과에서 정렬이나 리스트 수를 바꿀 때 고정되는 현상 해결을 위해
-	                            // 검색된 전체 회원 수보다 시작 글 번호가 더 클 때 대비
+	// 검색된 전체 회원 수보다 시작 글 번호가 더 클 때 대비
 	if ($search_totalRow < $pageNo) {
 		$pageNo = 0; // 시작 글 번호를 0으로 바꾸고
 		$page = 1; // 페이지도 1로 바꾼다
@@ -105,7 +105,7 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || isse
 	// TODO 검색 결과에서 정렬 순서를 바꾸고 재 검색 시 기준이 고정되는 문제 해결
 	
 	$sql_select_member = "SELECT * FROM member " . $searchSql . " ORDER BY " . $order . " LIMIT " . $pageNo . ", " . $pageSize;
-	echo $sql_select_member;
+// 	echo $sql_select_member;
 	$result = mysqli_query ( $conn, $sql_select_member );
 }
 ?>
@@ -247,7 +247,7 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || isse
 										</strong></th>
 										<th>휴대전화</th>
 										<th><strong class="array "> <span
-												onclick="submitSearch('region', '')">지역</span> <!-- TODO 주소는 정렬 대신 지역별 검색이 가능하도록 -->
+												onclick="submitSearch('region', '')">주소</span> <!-- TODO 주소는 정렬 대신 지역별 검색이 가능하도록 -->
 										</strong></th>
 										<th>메일/SMS/메모</th>
 									</tr>
