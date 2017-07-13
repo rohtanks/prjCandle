@@ -1,5 +1,5 @@
 <?php
-include_once '../dbConfig.php';
+include '../dbConfig.php';
 
 $login_user = (isset($_SESSION['login_user'])) ? $_SESSION['login_user'] : null;
 $brd_id = (isset($_GET['brd_id'])) ? $_GET['brd_id'] : null;
@@ -17,9 +17,9 @@ if ($login_user) {
 ?>
 <div id="commentInput">
 	<div class="commentTxt">
-		<form action="./commentWriteOk.php" method="post">
+		<form role="form" action="./commentWriteOk.php" method="post">
 			<input type="hidden" name="brd_id" value="<?=$row['brd_id']?>" />
-			<table>
+			<table class="table table-hover">
 	        	<tr>
 	          		<td>
 	                	<div>
@@ -29,9 +29,9 @@ if ($login_user) {
 	                </td>
 	        	</tr>
 	        	<tr>
-	                <td colspan="5">
-	                	<textarea name="co_content" id="co_content" class="textarea"></textarea> <!-- 혹시나 있을 비로그인 상황 위해 클릭시 로그인 체크 경고 -->
-	                 	<input type="submit" id="co_submit" class="submit_c" value="저장" /> <!-- 이것 또한 클릭시 로그인 이후 이용 가능합니다 란 경고창 -->
+	                <td>
+	                	<textarea name="co_content" id="co_content" class="form-control" rows="3"></textarea> <!-- 혹시나 있을 비로그인 상황 위해 클릭시 로그인 체크 경고 -->
+	                 	<input type="submit" id="co_submit" class="btn btn-default" value="저장" /> <!-- 이것 또한 클릭시 로그인 이후 이용 가능합니다 란 경고창 -->
 	                </td>
 	        	</tr>
 			</table>
@@ -42,7 +42,8 @@ if ($login_user) {
 }
 ?>
 <div id="commentView">
-	<form action="./commentWriteOk.php" method="post">
+	<form role="form" action="./commentWriteOk.php" method="post">
+		<div class="form-group">
 		<input type="hidden" name="brd_id" value="<?=$id?>" />
 		<?php
 		while ( $row = mysqli_fetch_assoc ( $result_comment ) ) {
@@ -113,6 +114,7 @@ if ($login_user) {
 		<?php
 		}
 		?>
+		</div>
 	</form>
 </div>
 <script>
@@ -168,10 +170,10 @@ if ($login_user) {
 				action = 'd';
 			}
 
-				comment += '<div class="writeComment">';
+				comment += '<div class="writeComment form-group">';
 				comment += '	<input type="hidden" name="w" value="' + action + '">';
 				comment += '	<input type="hidden" name="co_id" value="' + co_id + '">';
-				comment += '	<table>';
+				comment += '	<table class="table table-hover">';
 				comment += '		<tbody>';
 				if(action !== 'd') {
 					comment += '			<tr>';
@@ -184,14 +186,14 @@ if ($login_user) {
 					comment += '			</tr>';
 					comment += '			<tr>';
 					comment += '				<td colspan="5">';
-					comment += '					<textarea name="co_content" id="co_content">'+coContent+'</textarea>';
+					comment += '					<textarea name="co_content" id="co_content" class="form-control" rows="3">'+coContent+'</textarea>';
 					comment += '				</td>';
 					comment += '			</tr>';
 				}
 				comment += '		</tbody>';
 				comment += '	</table>';
-				comment += '	<div class="btnSet">';
-				comment += '		<input type="submit" value="확인">';
+				comment += '	<div class="btnSet form-group">';
+				comment += '		<input type="submit" class="btn btn-default" value="확인">';
 				comment += '	</div>';
 				comment += '</div>';
 			
