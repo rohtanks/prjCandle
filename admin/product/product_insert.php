@@ -15,7 +15,7 @@ mysqli_close($conn);
  ?>
 <body>
   <script type="text/javascript">
-  location.replace("http://localhost/prjCandle/admin/product/product.php");
+  location.replace("http://".$domainName."prjCandle/admin/product/product.php");
   </script>
 </body>
 </html>
