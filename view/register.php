@@ -45,7 +45,7 @@ include '../common.php';
                         <!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="table-responsive">
-								<form id="mem_form" action="<?=$domainName?>prjcandle/member/registerOk.php"
+								<form role="form" id="mem_form" action="<?=$domainName?>prjcandle/member/registerOk.php"
 									method="post" accept-charset="utf-8">
 									<dl class="form1">
 										<!-- description list dt(defines terms/names) dd(describes each term/name) 태그와 함께 사용 -->
