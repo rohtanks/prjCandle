@@ -41,47 +41,7 @@ session_start(); // 여기에 세션을 시작하는 이유는 로그인 페이�
 		<a href="<?=$domainName?>prjCandle/view/index.php">노아람캔들</a>
 	</div>
 	<div class="address-bar">경기도 군포시 송부로</div>
-	<?php
-	if (! isset ( $_SESSION ['login_user'] )) {
-		?>
-  <!-- 로그인 전 -->
-	<table width="959" border="0" cellspacing="0" cellpadding="0"
-		align="center" style="width: 170px; margin-left: 1200px;">
-		<tr>
-			<td align="center" valign="bottom" bgcolor="#fff">
-				<table border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<td><a href="<?=$domainName?>prjCandle/view/index.php">HOME</a></td>
-						<td><img src="../img/menu_line.gif" width="11"></td>
-						<td><a href="<?=$domainName?>prjCandle/view/login.php">로그인</a></td>
-						<td><img src="../img/menu_line.gif" width="11"></td>
-						<td><a href="<?=$domainName?>prjCandle/view/register.php">회원가입</a></td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-	<?php
-	} else {
-		?>
- <!-- 로그인 후 -->
-	<table width="959" border="0" cellspacing="0" cellpadding="0"
-		align="center" style="width: 120px; margin-left: 1200px;">
-		<tr>
-			<td align="center" valign="bottom" bgcolor="#fff">
-				<table border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<td><a href="<?=$domainName?>prjCandle/view/index.php">HOME</a></td>
-						<td><img src="../img/menu_line.gif" width="11"></td>
-						<td><a href="<?=$domainName?>prjCandle/member/logout.php">로그아웃</a></td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-	<?php
-	}
-	?>
+	
 	<!-- Navigation -->
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container">
@@ -90,6 +50,7 @@ session_start(); // 여기에 세션을 시작하는 이유는 로그인 페이�
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target="#bs-example-navbar-collapse-1">
 					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -140,6 +101,35 @@ session_start(); // 여기에 세션을 시작하는 이유는 로그인 페이�
 	            <?php
 				}
 				?>
+					<li>
+		            <?php
+					if (! isset ( $_SESSION ['login_user'] )) {
+					?>
+			  			<!-- 로그인 전 -->
+						<table class="table">
+						  <tr>
+						  	<td><a href="<?=$domainName?>prjCandle/view/index.php">HOME</a></td>
+						  	<td><img src="../img/menu_line.gif" width="11"></td>
+						  	<td><a href="<?=$domainName?>prjCandle/view/login.php">로그인</a></td>
+						  	<td><img src="../img/menu_line.gif" width="11"></td>
+						  	<td><a href="<?=$domainName?>prjCandle/view/register.php">회원가입</a></td>
+						  </tr>
+						</table>
+						<?php
+						} else {
+						?>
+					 <!-- 로그인 후 -->
+						<table class="table">
+						  <tr>
+							<td><a href="<?=$domainName?>prjCandle/view/index.php">HOME</a></td>
+							<td><img src="../img/menu_line.gif" width="11"></td>
+							<td><a href="<?=$domainName?>prjCandle/member/logout.php">로그아웃</a></td>
+						  </tr>
+						</table>
+					<?php
+					}
+					?>
+					</li>
 	            </ul>
 			</div>
 			<!-- /.navbar-collapse -->
