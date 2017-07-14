@@ -219,7 +219,7 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || isse
 							<?php 
 							$common->addHiddenField('mem_id', $_POST);
 							?>
-							<table class="table table-striped table-bordered table-hover"
+							<table class="table-responsive table-striped table-bordered table-hover"
 								id="dataTables-example">
 								<thead>
 									<tr>
