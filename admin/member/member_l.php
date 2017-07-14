@@ -85,7 +85,7 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || isse
 	if ($mem_startDate && $mem_endDate) {
 		$searchSql = "WHERE mem_created_datetime BETWEEN '" . $mem_startDate . "' AND '" . $mem_endDate . "'";
 	}
-	if ($search_type && $search_text && ! empty ( $mem_startDate ) && ! empty ( $mem_endDate )) {
+	if (($search_type || $search_text) && (!empty( $mem_startDate ) && !empty( $mem_endDate ))) {
 		$searchSql = "WHERE " . $search_type . " LIKE '%" . $search_text . "%' AND mem_created_datetime BETWEEN '" . $mem_startDate . "' AND '" . $mem_endDate . "'";
 	}
 	if (empty ( $search_type )) {
