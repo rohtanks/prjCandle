@@ -28,10 +28,10 @@ if (isset ( $_POST ['search_type'] )) {
 if (isset ( $_POST ['search_text'] )) {
 	$search_text = $_POST ['search_text'];
 }
-if (isset ( $_POST ['mem_startDate'] )) { // isset을 사용하면 날짜를 선택하지 않아도 true
+if (!empty ( $_POST ['mem_startDate'] )) { // isset을 사용하면 날짜를 선택하지 않아도 true
 	$mem_startDate = $_POST ['mem_startDate'];
 }
-if (isset ( $_POST ['mem_endDate'] )) {
+if (!empty ( $_POST ['mem_endDate'] )) {
 	$mem_endDate = $_POST ['mem_endDate'];
 }
 
@@ -78,15 +78,15 @@ $pageNo = ($page - 1) * $pageSize;
 
 $searchSql = "";
 
-if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || isset ( $_POST ['mem_startDate'] ) || isset ( $_POST ['mem_endDate'] )) {
+if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || !empty ( $_POST ['mem_startDate'] ) || !empty ( $_POST ['mem_endDate'] )) {
 	if ($search_type && $search_text) {
 		$searchSql = "WHERE " . $search_type . " LIKE '%" . $search_text . "%'";
 	}
 	if ($mem_startDate && $mem_endDate) {
-		$searchSql = "WHERE mem_created_datetime BETWEEN '" . $mem_startDate . "' AND '" . $mem_endDate . "'";
+		$searchSql = "WHERE mem_created_datetime >= '" . $mem_startDate . "' AND mem_created_datetime < '" . $mem_endDate . "'";
 	}
 	if (($search_type || $search_text) && (!empty( $mem_startDate ) && !empty( $mem_endDate ))) {
-		$searchSql = "WHERE " . $search_type . " LIKE '%" . $search_text . "%' AND mem_created_datetime BETWEEN '" . $mem_startDate . "' AND '" . $mem_endDate . "'";
+		$searchSql = "WHERE " . $search_type . " LIKE '%" . $search_text . "%' AND mem_created_datetime >= '" . $mem_startDate . "' AND mem_created_datetime < '" . $mem_endDate . "'";
 	}
 	if (empty ( $search_type )) {
 		$searchSql = "WHERE mem_id = null";
@@ -105,7 +105,7 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || isse
 	// TODO 검색 결과에서 정렬 순서를 바꾸고 재 검색 시 기준이 고정되는 문제 해결
 	
 	$sql_select_member = "SELECT * FROM member " . $searchSql . " ORDER BY " . $order . " LIMIT " . $pageNo . ", " . $pageSize;
-// 	echo $sql_select_member;
+	echo $sql_select_member;
 	$result = mysqli_query ( $conn, $sql_select_member );
 }
 ?>
@@ -129,7 +129,7 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || isse
 							<input type="hidden" name="page" id="page" value="<?=$page?>" /> <input
 								type="hidden" name="order" value="<?=$order?>" />
 									<?php
-									$common->addHiddenField ( 'search_type', $_POST );
+									$common->addHiddenField ( 'search_type,mem_startDate,mem_endDate', $_POST );
 									?>		
 									<table class="table table-bordered table-hover">
 								<tbody>
