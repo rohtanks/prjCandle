@@ -130,15 +130,9 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || !emp
 							<input type="hidden" name="page" id="page" value="<?=$page?>" /> <input
 								type="hidden" name="order" value="<?=$order?>" />
 									<?php
-<<<<<<< HEAD
 									$common->addHiddenField ( 'search_type,mem_startDate,mem_endDate', $_POST );
 									?>		
 									<table class="table table-bordered table-hover">
-=======
-									$common->addHiddenField ( 'search_type', $_POST );
-									?>
-									<table class="table table-hover">
->>>>>>> branch 'rohcal' of https://github.com/Jungbu/prjCandle.git
 								<tbody>
 									<tr>
 										<th>개인정보</th>
