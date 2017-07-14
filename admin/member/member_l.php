@@ -57,7 +57,7 @@ $select_count = mysqli_query ( $conn, $sql_total_count );
 $temp = mysqli_fetch_row ( $select_count );
 // mysqli_fetch_row 함수는 result set에서 레코드를 1개씩 리턴해준다(일반 배열 형태로 접근)
 $total_row = $temp [0]; // 고정적으로 보여줄 총 회원 수
-                       
+
 // 첫 번째 페이지의 번호
 if (isset ( $_POST ['page'] )) {
 	$page = $_POST ['page'];
@@ -95,7 +95,7 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || !emp
 	$search_count = mysqli_query ( $conn, $sql_search_count );
 	$tmp = mysqli_fetch_row ( $search_count );
 	$search_totalRow = $tmp [0]; // 검색된 전체 회원 수
-	                            
+
 	// 검색 결과에서 정렬이나 리스트 수를 바꿀 때 고정되는 현상 해결을 위해
 	// 검색된 전체 회원 수보다 시작 글 번호가 더 클 때 대비
 	if ($search_totalRow < $pageNo) {
@@ -103,7 +103,7 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || !emp
 		$page = 1; // 페이지도 1로 바꾼다
 	}
 	// TODO 검색 결과에서 정렬 순서를 바꾸고 재 검색 시 기준이 고정되는 문제 해결
-	
+
 	$sql_select_member = "SELECT * FROM member " . $searchSql . " ORDER BY " . $order . " LIMIT " . $pageNo . ", " . $pageSize;
 	echo $sql_select_member;
 	$result = mysqli_query ( $conn, $sql_select_member );
@@ -122,6 +122,7 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || !emp
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-body">
+						<div class="table-responsive table-bordered">
 						<form name="search_form" id="sform"
 							action="<?=htmlentities($_SERVER['PHP_SELF'])?>" method="post">
 							<input type="hidden" name="pageSize" value="<?=$pageSize?>" />
@@ -129,9 +130,15 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || !emp
 							<input type="hidden" name="page" id="page" value="<?=$page?>" /> <input
 								type="hidden" name="order" value="<?=$order?>" />
 									<?php
+<<<<<<< HEAD
 									$common->addHiddenField ( 'search_type,mem_startDate,mem_endDate', $_POST );
 									?>		
 									<table class="table table-bordered table-hover">
+=======
+									$common->addHiddenField ( 'search_type', $_POST );
+									?>
+									<table class="table table-hover">
+>>>>>>> branch 'rohcal' of https://github.com/Jungbu/prjCandle.git
 								<tbody>
 									<tr>
 										<th>개인정보</th>
@@ -169,12 +176,14 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || !emp
 							</div>
 						</form>
 					</div>
+					<!-- /.table-responsive table-bordered -->
+					</div>
 				</div>
 			</div>
 		</div>
 		<!-- 회원 정보 검색창 -->
 		<!-- 검색 결과 -->
-	
+
 		<!-- 일반보기 -->
 		<div class="row">
 			<div class="col-lg-12">
@@ -213,13 +222,14 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || !emp
 						</select>
 					</form>
 					<div class="panel-body">
+						<div class="table-responsive table-bordered">
 						<form name="list_form" id="lform"
 							action="<?=$domainName?>prjCandle/admin/member/member_v.php" method="post">
 							<input type="hidden" name="page" value="<?=$page?>" />
-							<?php 
+							<?php
 							$common->addHiddenField('mem_id', $_POST);
 							?>
-							<table class="table-responsive table-striped table-bordered table-hover"
+							<table class="table table-striped table-bordered table-hover"
 								id="dataTables-example">
 								<thead>
 									<tr>
@@ -270,20 +280,22 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || !emp
 										}
 									}
 									mysqli_close ( $conn );
-									?>	
+									?>
 							    </tbody>
 							</table>
 						</form>
-						
+					</div>
+					<!-- /.table-responsive table-bordered -->
+
 						<!-- 페이징 -->
-						<div>
+						<div align="center" class="table-responsive">
 							<?php
 							$params = array (
 									'pageSize' => $pageSize,
 									'pageListSize' => $pageListSize,
 									'page' => ( int ) $page,
 									'totalRow' => $search_totalRow,
-									'pageType' => 'bootstrapPost' 
+									'pageType' => 'bootstrapPost'
 							);
 							if ($search_totalRow > 0) {
 								echo $common->paging ( $params );
@@ -299,7 +311,7 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || !emp
 				</div>
 			</div>
 		</div>
-	
+
 	</div>
 	<!-- /#page-wrapper -->
 <!-- wrapper div까지 닫자! -->
@@ -320,7 +332,7 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || !emp
 		if (searchTotal > 0) { // 검색 값이 없을 때 전송하면 정렬 순서가 미리 고정됨
 			sf.order.value = i +","+ o;
 			sf.submit();
-		}	
+		}
 	}
 	function goMemberView(v) {
 		console.log(v);
@@ -363,7 +375,7 @@ if (isset ( $_POST ['search_type'] ) || isset ( $_POST ['search_text'] ) || !emp
 			})
 		});
 		// 날짜선택기 세팅 끝
-		
+
 	});
 </script>
 <?php
